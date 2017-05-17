@@ -1,0 +1,145 @@
+﻿
+@import "groot-variables.scss";
+
+
+.gray {
+    color: $gray !important;
+}
+
+.green {
+    color: $green !important;
+}
+
+.orange {
+    color: $orange !important;
+}
+
+.yellow {
+    color: $yellow !important;
+}
+
+.blue {
+    color: $blue !important;
+}
+
+.teal {
+    color: $teal !important;
+}
+
+.red {
+    color: $red !important;
+}
+
+
+
+.dataTable tbody tr:hover {
+    background-color: $light-orange;
+}
+
+
+.required, .required > button {
+    border-left: 5px solid $green;
+}
+
+.required-error, .required-error > button {
+    border-left: 5px solid $red;
+}
+
+li.required {
+    border-left: 5px solid $green;
+}
+
+.checkbox-fix {
+    width: 50px !important;
+}
+/********************************************************/
+.dropdown-size-xs {
+    width: 75px !important;
+}
+
+.dropdown-size-xs .btn {
+    padding: 3px 6px !important;
+    font-size: 1em !important;
+}
+
+.dropdown-size-xs .dropdown-menu {
+    font-size: 1em !important;
+}
+/********************************************************/
+.dropdown-size-sm {
+    width: 100px !important;
+    font-size: 1em !important;
+}
+
+.dropdown-size-sm li a {
+}
+
+.dropdown-size-sm .btn {
+    padding: 3px 6px !important;
+    font-size: 1em !important;
+}
+
+.dropdown-size-sm .dropdown-menu {
+    font-size: 1em !important;
+}
+/********************************************************/
+.dropdown-size-md {
+    width: 160px !important;
+    background-color: transparent;
+}
+
+.dropdown-size-md li a {
+}
+
+.dropdown-size-md .btn {
+    padding: 3px 6px !important;
+}
+
+.dropdown-size-md-1 {
+    width: 225px !important;
+    background-color: transparent;
+}
+/********************************************************/
+.dropdown-size-md-x {
+    width: 200px !important;
+    background-color: transparent;
+}
+
+.dropdown-size-md-x .btn {
+    padding: 3px 6px !important;
+    font-size: 12px !important;
+}
+/********************************************************/
+.txt-width-smaller {
+    max-width: 50px;
+}
+
+.txt-width-small {
+    max-width: 75px;
+}
+
+.txt-width-small-a {
+    max-width: 80px;
+}
+
+.txt-width-medium {
+    max-width: 175px;
+}
+
+.txt-width-large {
+    max-width: 200px;
+}
+
+.txt-width-larger {
+    max-width: 250px;
+}
+/********************************************************/
+
+.bootstrap-growl {
+    font-size: 1.4em;
+}
+
+.bootbox-body {
+    font-size: 1.2em;
+    line-height: 2.0em;
+}
