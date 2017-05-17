@@ -37,6 +37,6 @@ export class TimecardService {
 
         return this.http.get(this.path)
             .do(res => this.storeHelperService.update('timecard_store', res.json().data))
-            .do(res => this.logger.log(JSON.stringify(res.json().data)));
+            ; // .do(res => this.logger.log(JSON.stringify(res.json().data)));
     }
 }

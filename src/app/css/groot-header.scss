@@ -1,0 +1,45 @@
+
+@import "./groot-variables.scss";
+
+
+.navbar-default {
+    background-color: $white;
+    background-image: none;
+    border: 0;
+    margin-bottom: 0 !important;
+}
+
+.logo, .logo:hover {
+    padding: .5em 0 0 .5em;
+    margin-left: 10px;
+    font-size: unset;
+}
+.logo .text {
+    font-size: 2em;
+    position: relative;
+    top: 8px;
+}
+
+
+
+.header-nav .nav > li > a {
+    padding: 10px 0 0 5px;
+}
+
+.header-nav .nav > li:not(:last-child) > a::after {
+    content: " |";
+}
+
+.navbar-text {
+    margin-top: 13px;
+}
+
+.user-options:hover {
+    cursor: pointer;
+}
+
+
+.admin-menu {
+    padding: 0;
+}
+

@@ -1,4 +1,7 @@
 
+import { CalendarEvent } from 'angular-calendar';
+
+
 
 export interface TimeCard {
 
@@ -14,4 +17,8 @@ export interface TimeCardEntry {
     workTask: string;
     dayCode: number;
     value: number;
+}
+
+export interface TimeCardEvent extends CalendarEvent {
+    timecard: TimeCard;
 }

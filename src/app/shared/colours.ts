@@ -1,5 +1,5 @@
 
-export const colors: any = {
+export const COLOURS: any = {
   red: {
     primary: '#ad2121',
     secondary: '#FAE3E3'

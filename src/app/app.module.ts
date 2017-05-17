@@ -19,6 +19,8 @@ import { Logger } from './services/logger.service';
 import { DashboardContainer } from './containers/dashboard.container';
 import { TimecardContainer } from './containers/timecard.container';
 
+import { HeaderComponent }  from './ui/header/header.component';
+
 import { Store } from './shared/store';
 
 import { ApiService } from './services/api.service';
@@ -50,7 +52,8 @@ import { TimecardService } from './services/timecard.service';
   declarations: [
     AppComponent,
     DashboardContainer,
-    TimecardContainer
+    TimecardContainer,
+    HeaderComponent
   ],
   providers: [
     Logger,

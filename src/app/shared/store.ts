@@ -8,14 +8,14 @@ import { User } from '../models/user';
 
 
 export interface State {
-    timecards: Array<TimeCard>,
+    timecards: Array<TimeCard>;
     user: User;
 }
 
 const defaultState = {
     timecards: [],
     user: {}
-}
+};
 
 const _store = new BehaviorSubject<State>(defaultState);
 
@@ -23,7 +23,7 @@ const _store = new BehaviorSubject<State>(defaultState);
 export class Store {
 
     private _store = _store;
-    changes = this._store.asObservable().distinctUntilChanged()
+    changes = this._store.asObservable().distinctUntilChanged();
 
     setState(state: State) {
         this._store.next(state);

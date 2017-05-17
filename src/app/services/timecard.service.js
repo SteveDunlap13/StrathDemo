@@ -38,8 +38,7 @@ var TimecardService = (function () {
         //    .do(res => this.storeHelperService.update('timecard_store', res.data));
         var _this = this;
         return this.http.get(this.path)
-            .do(function (res) { return _this.storeHelperService.update('timecard_store', res.json().data); })
-            .do(function (res) { return _this.logger.log(JSON.stringify(res.json().data)); });
+            .do(function (res) { return _this.storeHelperService.update('timecard_store', res.json().data); }); // .do(res => this.logger.log(JSON.stringify(res.json().data)));
     };
     return TimecardService;
 }());

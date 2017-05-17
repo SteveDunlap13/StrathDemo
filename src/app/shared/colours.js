@@ -1,5 +1,5 @@
 "use strict";
-exports.colors = {
+exports.COLOURS = {
     red: {
         primary: '#ad2121',
         secondary: '#FAE3E3'
