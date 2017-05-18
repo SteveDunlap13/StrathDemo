@@ -9,96 +9,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var store_1 = require("../shared/store");
+//import { CalendarEvent } from 'angular-calendar';
+//import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
+var Subject_1 = require("rxjs/Subject");
+//import { Store } from '../shared/store';
+//import { Subscription } from 'rxjs/Rx';
 var timecard_service_1 = require("../services/timecard.service");
 var logger_service_1 = require("../services/logger.service");
-var colours_1 = require("../shared/colours");
 var TimecardContainer = (function () {
-    //refresh: Subject<any> = new Subject();
-    //processCalendarEvents(): void {
-    //
-    //    if(this.timecardData === undefined) {
-    //        return;
-    //    }
-    //
-    //    this.events$ = this.timecardData
-    //        .map(res => res)
-    //        .map(({results}: {results: TimeCardEvent[]}) => {
-    //        return results.map((tc: TimeCardEvent) => {
-    //            return {
-    //                title: tc.timecard.employeeId,
-    //                start: new Date(),
-    //                color: COLOURS.yellow,
-    //                timecard: tc
-    //            };
-    //        });
-    //    });
-    //}
-    function TimecardContainer(timecardService, store, logger) {
+    function TimecardContainer(timecardService, logger) {
         this.timecardService = timecardService;
-        this.store = store;
         this.logger = logger;
         this.view = 'month';
         this.viewDate = new Date();
-        //events$: TimeCardEvent[];
         this.activeDayIsOpen = false;
-        /*
-        this.timecardService.getTimecards()
-            .subscribe();
-
-        this.timecardSub = this.store.changes.pluck('timecard_store')
-            .subscribe((data: any) => {
-                this.timecardData = data;
-                this.processCalendarEvents();
-            });
-        */
+        this.refresh = new Subject_1.Subject();
     }
     TimecardContainer.prototype.ngOnInit = function () {
-        var _this = this;
-        var xxx$ = this.timecardService.fetchTimecards();
-        xxx$.subscribe(function (tc) {
-            //this.timecards = tc;
-            console.log(tc);
-            tc.map(function (wwx) {
-                _this.timecardsEvents.push({
-                    title: wwx.employeeId.toString(),
-                    start: new Date(),
-                    color: colours_1.COLOURS.red,
-                    timecard: wwx
-                });
-            });
-            _this.events = _this.timecardsEvents;
-            //console.log(food);
-        }, function () { }, function () { return console.log("completed."); });
-        /*
-        
-                this.events$ = this.timecardData
-                    .map(res => res.json())
-                    .map(({results}: {results: TimeCardEvent[]}) => {
-                    return results.map((tc: TimeCardEvent) => {
-                        return {
-                            title: tc.timecard.employeeId,
-                            start: new Date(),
-                            color: COLOURS.yellow,
-                            timecard: tc
-                        };
-                    });
-                });
-        
-         */
+        this.fetchEvents();
     };
-    TimecardContainer.prototype.ngOnDestroy = function () {
-        //this.timecardSub.unsubscribe();
+    TimecardContainer.prototype.fetchEvents = function () {
+        this.events$ = this.timecardService.getTimecardEntries()
+            .map(function (data) {
+            return data.map(function (timecardentry) {
+                return {
+                    title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
+                    start: new Date(),
+                    color: timecardentry.colour,
+                    timecardentry: timecardentry
+                };
+            });
+        });
     };
     return TimecardContainer;
 }());
 TimecardContainer = __decorate([
     core_1.Component({
         selector: 'timecard-container',
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         templateUrl: './timecard.container.html'
     }),
-    __metadata("design:paramtypes", [timecard_service_1.TimecardService, store_1.Store, logger_service_1.Logger])
+    __metadata("design:paramtypes", [timecard_service_1.TimecardService, logger_service_1.Logger])
 ], TimecardContainer);
 exports.TimecardContainer = TimecardContainer;
 //# sourceMappingURL=timecard.container.js.map

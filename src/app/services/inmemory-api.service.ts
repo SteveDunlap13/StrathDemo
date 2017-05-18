@@ -1,14 +1,14 @@
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { TIMECARDS } from '../models/mock-timecards';
+import { TIMECARDENTRIES } from '../models/mock-timecards';
 
 
 export class InMemoryApiService implements InMemoryDbService {
 
   createDb() {
 
-    let timesheet = TIMECARDS;
+    let timesheet = TIMECARDENTRIES;
 
     return { timesheet };
   }

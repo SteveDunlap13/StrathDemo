@@ -1,24 +1,18 @@
 
 import { CalendarEvent } from 'angular-calendar';
+import { Employee } from './employee';
 
-
-
-export interface TimeCard {
-
-    id: number;
-    employeeId: number;
-    weekNum: number;
-    timeCardEntries: TimeCardEntry[];
-}
 
 export interface TimeCardEntry {
-
     id: number;
+    employee: Employee;
+    eventstart: Date;
+    eventend: Date;
     workTask: string;
-    dayCode: number;
     value: number;
+    colour: {};
 }
 
-export interface TimeCardEvent extends CalendarEvent {
-    timecard: TimeCard;
+export interface TimeCardEntryEvent extends CalendarEvent {
+    timecardentry: TimeCardEntry;
 }

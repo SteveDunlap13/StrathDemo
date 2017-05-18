@@ -4,7 +4,7 @@ var InMemoryApiService = (function () {
     function InMemoryApiService() {
     }
     InMemoryApiService.prototype.createDb = function () {
-        var timesheet = mock_timecards_1.TIMECARDS;
+        var timesheet = mock_timecards_1.TIMECARDENTRIES;
         return { timesheet: timesheet };
     };
     return InMemoryApiService;

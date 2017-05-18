@@ -6,9 +6,9 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { TimeCard } from '../models/timecard';
+import { TimeCardEntry } from '../models/timecard';
 
-import { StoreHelperService } from './store-helper.service';
+//import { StoreHelperService } from './store-helper.service';
 import { Logger } from '../services/logger.service';
 
 
@@ -18,7 +18,8 @@ export class TimecardService {
     path: string = '/api/timesheet';
 
     // constructor(private apiService: ApiService, private storeHelperService: StoreHelperService) { }
-    constructor(private http: Http, private storeHelperService: StoreHelperService, private logger: Logger) { }
+    //constructor(private http: Http, private storeHelperService: StoreHelperService, private logger: Logger) { }
+    constructor(private http: Http, private logger: Logger) { }
 
 
 /*
@@ -31,19 +32,23 @@ export class TimecardService {
         return this.apiService.post(this.path, note)
             .do(savedNote => this.storeHelperService.add('timecard_store', savedNote));
     }
-*/
 
-    getTimecards() {
+    xxxxxgetTimecards() {
 
         // return this.apiService.get(this.path)
         //    .do(res => this.storeHelperService.update('timecard_store', res.data));
 
-        return this.http.get(this.path).do(res => this.storeHelperService.update('timecard_store', res.json().data));
+        //return this.http.get(this.path).do(res => this.storeHelperService.update('timecard_store', res.json().data));
             // .do(res => this.logger.log(JSON.stringify(res.json().data)));
     }
+*/
 
-    fetchTimecards(): Observable<TimeCard[]> {
+    getTimecards(): Observable<TimeCardEntry[]> {
 
         return this.http.get(this.path).map(res => res.json().data);
+    }
+    getTimecardEntries() {
+        return this.http.get(this.path)
+            .map(r => r.json().data);
     }
 }

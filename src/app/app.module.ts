@@ -21,11 +21,11 @@ import { TimecardContainer } from './containers/timecard.container';
 
 import { HeaderComponent }  from './ui/header/header.component';
 
-import { Store } from './shared/store';
+//import { Store } from './shared/store';
 
 import { ApiService } from './services/api.service';
 import { InMemoryApiService }     from './services/inmemory-api.service';
-import { StoreHelperService } from './services/store-helper.service';
+//import { StoreHelperService } from './services/store-helper.service';
 import { TimecardService } from './services/timecard.service';
 
 
@@ -58,9 +58,9 @@ import { TimecardService } from './services/timecard.service';
   providers: [
     Logger,
     ApiService,
-    StoreHelperService,
+    //StoreHelperService,
     TimecardService,
-    Store
+    //Store
   ],
 
   bootstrap:    [ AppComponent ]

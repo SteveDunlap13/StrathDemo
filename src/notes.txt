@@ -1,0 +1,16 @@
+
+//        this.timecardSub = this.timecardService.getTimecards()
+//            .subscribe(
+//                data => {
+//                    let tcData = data;
+//                    //tcData.map(tc => {
+//                    //    tc.title = tc.employeeId.toString();
+//                    //    tc.start = new Date();
+//                    //    tc.color = COLOURS.red;
+//                    //});
+//                    this.events = tcData;
+//                    this.refresh.next();
+//                    console.log(this.events);
+//                },
+//                error => { console.log(error); }
+//            );

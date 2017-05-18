@@ -20,10 +20,10 @@ var logger_service_1 = require("./services/logger.service");
 var dashboard_container_1 = require("./containers/dashboard.container");
 var timecard_container_1 = require("./containers/timecard.container");
 var header_component_1 = require("./ui/header/header.component");
-var store_1 = require("./shared/store");
+//import { Store } from './shared/store';
 var api_service_1 = require("./services/api.service");
 var inmemory_api_service_1 = require("./services/inmemory-api.service");
-var store_helper_service_1 = require("./services/store-helper.service");
+//import { StoreHelperService } from './services/store-helper.service';
 var timecard_service_1 = require("./services/timecard.service");
 var AppModule = (function () {
     function AppModule() {
@@ -58,9 +58,8 @@ AppModule = __decorate([
         providers: [
             logger_service_1.Logger,
             api_service_1.ApiService,
-            store_helper_service_1.StoreHelperService,
+            //StoreHelperService,
             timecard_service_1.TimecardService,
-            store_1.Store
         ],
         bootstrap: [app_component_1.AppComponent]
     })

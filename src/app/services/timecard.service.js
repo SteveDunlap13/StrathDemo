@@ -12,13 +12,13 @@ var core_1 = require("@angular/core");
 // import { ApiService } from './api.service';
 var http_1 = require("@angular/http");
 require("rxjs/Rx");
-var store_helper_service_1 = require("./store-helper.service");
+//import { StoreHelperService } from './store-helper.service';
 var logger_service_1 = require("../services/logger.service");
 var TimecardService = (function () {
     // constructor(private apiService: ApiService, private storeHelperService: StoreHelperService) { }
-    function TimecardService(http, storeHelperService, logger) {
+    //constructor(private http: Http, private storeHelperService: StoreHelperService, private logger: Logger) { }
+    function TimecardService(http, logger) {
         this.http = http;
-        this.storeHelperService = storeHelperService;
         this.logger = logger;
         this.path = '/api/timesheet';
     }
@@ -32,22 +32,28 @@ var TimecardService = (function () {
             return this.apiService.post(this.path, note)
                 .do(savedNote => this.storeHelperService.add('timecard_store', savedNote));
         }
+    
+        xxxxxgetTimecards() {
+    
+            // return this.apiService.get(this.path)
+            //    .do(res => this.storeHelperService.update('timecard_store', res.data));
+    
+            //return this.http.get(this.path).do(res => this.storeHelperService.update('timecard_store', res.json().data));
+                // .do(res => this.logger.log(JSON.stringify(res.json().data)));
+        }
     */
     TimecardService.prototype.getTimecards = function () {
-        // return this.apiService.get(this.path)
-        //    .do(res => this.storeHelperService.update('timecard_store', res.data));
-        var _this = this;
-        return this.http.get(this.path).do(function (res) { return _this.storeHelperService.update('timecard_store', res.json().data); });
-        // .do(res => this.logger.log(JSON.stringify(res.json().data)));
-    };
-    TimecardService.prototype.fetchTimecards = function () {
         return this.http.get(this.path).map(function (res) { return res.json().data; });
+    };
+    TimecardService.prototype.getTimecardEntries = function () {
+        return this.http.get(this.path)
+            .map(function (r) { return r.json().data; });
     };
     return TimecardService;
 }());
 TimecardService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, store_helper_service_1.StoreHelperService, logger_service_1.Logger])
+    __metadata("design:paramtypes", [http_1.Http, logger_service_1.Logger])
 ], TimecardService);
 exports.TimecardService = TimecardService;
 //# sourceMappingURL=timecard.service.js.map
