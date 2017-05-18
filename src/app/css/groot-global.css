@@ -215,3 +215,7 @@ textarea {
   top: -15px;
   left: 20px;
 }
+
+.test-class a {
+  color: #FF3D7F !important;
+}

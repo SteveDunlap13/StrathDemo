@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-//import { CalendarEvent } from 'angular-calendar';
+var angular_calendar_1 = require("angular-calendar");
 //import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
 var Subject_1 = require("rxjs/Subject");
 //import { Store } from '../shared/store';
 //import { Subscription } from 'rxjs/Rx';
+var event_title_formatter_provider_1 = require("../providers/event-title-formatter.provider");
 var timecard_service_1 = require("../services/timecard.service");
 var logger_service_1 = require("../services/logger.service");
 var TimecardContainer = (function () {
@@ -22,12 +23,13 @@ var TimecardContainer = (function () {
         this.logger = logger;
         this.view = 'month';
         this.viewDate = new Date();
-        this.activeDayIsOpen = false;
         this.refresh = new Subject_1.Subject();
     }
     TimecardContainer.prototype.ngOnInit = function () {
         this.fetchEvents();
     };
+    // See Context Menu
+    // https://mattlewis92.github.io/angular-calendar/#/context-menu
     TimecardContainer.prototype.fetchEvents = function () {
         this.events$ = this.timecardService.getTimecardEntries()
             .map(function (data) {
@@ -36,17 +38,35 @@ var TimecardContainer = (function () {
                     title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
                     start: new Date(),
                     color: timecardentry.colour,
-                    timecardentry: timecardentry
+                    timecardentry: timecardentry,
+                    cssClass: 'test-class'
                 };
             });
         });
+    };
+    TimecardContainer.prototype.groupEvents = function (cell) {
+        var groups = {};
+        cell.events.forEach(function (event) {
+            groups[event.timecardentry.workTask] = groups[event.timecardentry.workTask] || [];
+            groups[event.timecardentry.workTask].push(event);
+        });
+        cell['eventGroups'] = Object.entries(groups);
+    };
+    TimecardContainer.prototype.eventClicked = function (_a) {
+        var event = _a.event;
+        console.log('Event clicked', event);
     };
     return TimecardContainer;
 }());
 TimecardContainer = __decorate([
     core_1.Component({
         selector: 'timecard-container',
-        templateUrl: './timecard.container.html'
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        templateUrl: './timecard.container.html',
+        providers: [{
+                provide: angular_calendar_1.CalendarEventTitleFormatter,
+                useClass: event_title_formatter_provider_1.EventTitleFormatter
+            }]
     }),
     __metadata("design:paramtypes", [timecard_service_1.TimecardService, logger_service_1.Logger])
 ], TimecardContainer);

@@ -10,12 +10,30 @@
   <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'medium' }}</strong>
 </div>
 
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div class="cal-cell-top">
+    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+  </div>
+  <div class="cell-totals">
+    <span
+      *ngFor="let group of day.eventGroups"
+      class="badge badge-{{ group[0] }}">
+      {{ group[1].length }}
+    </span>
+  </div>
+</ng-template>
+
 <div *ngIf="events$ | async; else loading; let events">
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
       *ngSwitchCase="'month'"
       [viewDate]="viewDate"
       [events]="events"
+      [dayModifier]="groupEvents"
+      [cellTemplate]="customCellTemplate"
+      [activeDayIsOpen]="true"
+      (eventClicked)="eventClicked($event)"
       (dayClicked)="clickedDate = $event.day.date">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
