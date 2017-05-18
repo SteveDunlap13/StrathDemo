@@ -9,58 +9,86 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var date_fns_1 = require("date-fns");
 var store_1 = require("../shared/store");
 var timecard_service_1 = require("../services/timecard.service");
 var logger_service_1 = require("../services/logger.service");
 var colours_1 = require("../shared/colours");
 var TimecardContainer = (function () {
+    //refresh: Subject<any> = new Subject();
+    //processCalendarEvents(): void {
+    //
+    //    if(this.timecardData === undefined) {
+    //        return;
+    //    }
+    //
+    //    this.events$ = this.timecardData
+    //        .map(res => res)
+    //        .map(({results}: {results: TimeCardEvent[]}) => {
+    //        return results.map((tc: TimeCardEvent) => {
+    //            return {
+    //                title: tc.timecard.employeeId,
+    //                start: new Date(),
+    //                color: COLOURS.yellow,
+    //                timecard: tc
+    //            };
+    //        });
+    //    });
+    //}
     function TimecardContainer(timecardService, store, logger) {
-        var _this = this;
         this.timecardService = timecardService;
         this.store = store;
         this.logger = logger;
-        this.timecardData = [];
-        this.calendarEvents = [];
         this.view = 'month';
         this.viewDate = new Date();
-        this.events = []; // CalendarEvent[] = [];
+        //events$: TimeCardEvent[];
         this.activeDayIsOpen = false;
+        /*
         this.timecardService.getTimecards()
             .subscribe();
+
         this.timecardSub = this.store.changes.pluck('timecard_store')
-            .subscribe(function (data) { return _this.processTimecardData(data); });
+            .subscribe((data: any) => {
+                this.timecardData = data;
+                this.processCalendarEvents();
+            });
+        */
     }
-    TimecardContainer.prototype.processTimecardData = function (data) {
-        this.timecardData = data;
-        if (this.timecardData === undefined) {
-            return;
-        }
-        var getStart = {
-            month: date_fns_1.startOfMonth,
-            week: date_fns_1.startOfWeek,
-            day: date_fns_1.startOfDay
-        }[this.view];
-        var getEnd = {
-            month: date_fns_1.endOfMonth,
-            week: date_fns_1.endOfWeek,
-            day: date_fns_1.endOfDay
-        }[this.view];
-        // figure out how to process timecarddata as an obervable
-        for (var i = 0; i < this.timecardData.length; i++) {
-            var xxx = {
-                title: this.timecardData[i].employeeId,
-                start: new Date(),
-                color: colours_1.COLOURS.yellow,
-                timecard: this.timecardData[i]
-            };
-            this.events.push(xxx);
-            console.log('\n');
-            this.logger.log(JSON.stringify(xxx));
-        }
+    TimecardContainer.prototype.ngOnInit = function () {
+        var _this = this;
+        var xxx$ = this.timecardService.fetchTimecards();
+        xxx$.subscribe(function (tc) {
+            //this.timecards = tc;
+            console.log(tc);
+            tc.map(function (wwx) {
+                _this.timecardsEvents.push({
+                    title: wwx.employeeId.toString(),
+                    start: new Date(),
+                    color: colours_1.COLOURS.red,
+                    timecard: wwx
+                });
+            });
+            _this.events = _this.timecardsEvents;
+            //console.log(food);
+        }, function () { }, function () { return console.log("completed."); });
+        /*
+        
+                this.events$ = this.timecardData
+                    .map(res => res.json())
+                    .map(({results}: {results: TimeCardEvent[]}) => {
+                    return results.map((tc: TimeCardEvent) => {
+                        return {
+                            title: tc.timecard.employeeId,
+                            start: new Date(),
+                            color: COLOURS.yellow,
+                            timecard: tc
+                        };
+                    });
+                });
+        
+         */
     };
     TimecardContainer.prototype.ngOnDestroy = function () {
-        this.timecardSub.unsubscribe();
+        //this.timecardSub.unsubscribe();
     };
     return TimecardContainer;
 }());

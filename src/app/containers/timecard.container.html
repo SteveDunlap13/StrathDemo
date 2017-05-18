@@ -10,7 +10,7 @@
   <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'medium' }}</strong>
 </div>
 
-<div [ngSwitch]="view">
+<div [ngSwitch]="view" *ngIf="events$ | async; else loading; let events">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
     [viewDate]="viewDate"
@@ -28,24 +28,4 @@
     [viewDate]="viewDate"
     [events]="events">
   </mwl-calendar-day-view>
-</div>
-
-
-<div *ngFor="let timecard of timecards">
-
-    <span>{{timecard.id}}</span>
-    <span>{{timecard.employeeId}}</span>
-    <span>{{timecard.weekNum}}</span>
-
-    <input [(ngModel)]="timecard.weekNum" />
-
-    <div *ngFor="let en of timecard.timeCardEntries">
-
-        <span>{{en.id}}</span>
-        <span>{{en.workTask}}</span>
-        <span>{{en.dayCode}}</span>
-        <span>{{en.Value}}</span>
-
-    </div>
-
 </div>

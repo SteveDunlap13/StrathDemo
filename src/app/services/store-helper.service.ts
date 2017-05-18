@@ -27,7 +27,7 @@ export class StoreHelperService {
             if (item.id !== state.id) {
                 return item;
             }
-            return Object.assign({}, item, state)
+            return Object.assign({}, item, state);
         })
         }));
     }

@@ -37,8 +37,11 @@ var TimecardService = (function () {
         // return this.apiService.get(this.path)
         //    .do(res => this.storeHelperService.update('timecard_store', res.data));
         var _this = this;
-        return this.http.get(this.path)
-            .do(function (res) { return _this.storeHelperService.update('timecard_store', res.json().data); }); // .do(res => this.logger.log(JSON.stringify(res.json().data)));
+        return this.http.get(this.path).do(function (res) { return _this.storeHelperService.update('timecard_store', res.json().data); });
+        // .do(res => this.logger.log(JSON.stringify(res.json().data)));
+    };
+    TimecardService.prototype.fetchTimecards = function () {
+        return this.http.get(this.path).map(function (res) { return res.json().data; });
     };
     return TimecardService;
 }());
