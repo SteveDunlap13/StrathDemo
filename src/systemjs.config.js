@@ -34,7 +34,8 @@
       'calendar-utils': 'npm:calendar-utils/dist/umd/calendarUtils.js',
       'angular-resizable-element': 'npm:angular-resizable-element/dist/umd/angular-resizable-element.js',
       'angular-draggable-droppable': 'npm:angular-draggable-droppable/dist/umd/angular-draggable-droppable.js',
-      'date-fns': 'npm:date-fns'
+      'date-fns': 'npm:date-fns',
+      'rrule': 'npm:rrule@2.2.0'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -49,10 +50,6 @@
       rxjs: {
         defaultExtension: 'js'
       },
-//      'angular-in-memory-web-api': {
-//        main: 'index.js',
-//        defaultExtension: 'js'
-//      },
       'date-fns': {
         main: './index.js',
         defaultExtension: 'js'

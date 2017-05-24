@@ -10,8 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var angular_calendar_1 = require("angular-calendar");
-//import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
+var date_fns_1 = require("date-fns");
 var Subject_1 = require("rxjs/Subject");
+//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 //import { Store } from '../shared/store';
 //import { Subscription } from 'rxjs/Rx';
 var event_title_formatter_provider_1 = require("../providers/event-title-formatter.provider");
@@ -24,13 +25,13 @@ var TimecardContainer = (function () {
         this.view = 'month';
         this.viewDate = new Date();
         this.refresh = new Subject_1.Subject();
+        this.activeDayIsOpen = true;
     }
     TimecardContainer.prototype.ngOnInit = function () {
         this.fetchEvents();
     };
-    // See Context Menu
-    // https://mattlewis92.github.io/angular-calendar/#/context-menu
     TimecardContainer.prototype.fetchEvents = function () {
+        var _this = this;
         this.events$ = this.timecardService.getTimecardEntries()
             .map(function (data) {
             return data.map(function (timecardentry) {
@@ -39,7 +40,14 @@ var TimecardContainer = (function () {
                     start: new Date(),
                     color: timecardentry.colour,
                     timecardentry: timecardentry,
-                    cssClass: 'test-class'
+                    cssClass: 'test-class',
+                    actions: [{
+                            label: '<i class="fa fa-fw fa-pencil"></i>',
+                            onClick: function (_a) {
+                                var event = _a.event;
+                                _this.handleEvent('Edited', event);
+                            }
+                        }]
                 };
             });
         });
@@ -52,9 +60,38 @@ var TimecardContainer = (function () {
         });
         cell['eventGroups'] = Object.entries(groups);
     };
-    TimecardContainer.prototype.eventClicked = function (_a) {
+    TimecardContainer.prototype.dayClicked = function (_a) {
+        var date = _a.date, events = _a.events;
+        if (date_fns_1.isSameMonth(date, this.viewDate)) {
+            if ((date_fns_1.isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+                this.activeDayIsOpen = false;
+            }
+            else {
+                this.activeDayIsOpen = true;
+                this.viewDate = date;
+            }
+        }
+        this.clickedDate = date;
+    };
+    TimecardContainer.prototype.handleEvent = function (action, _a) {
         var event = _a.event;
-        console.log('Event clicked', event);
+        console.log('Event: ' + action, event);
+        //this.modalData = {event.event, action};
+        //this.modal.open(this.modalContent, {size: 'lg'});
+    };
+    TimecardContainer.prototype.addEvent = function () {
+        //this.events.push({
+        //    title: 'New event',
+        //    start: startOfDay(new Date()),
+        //    end: endOfDay(new Date()),
+        //    color: colors.red,
+        //    draggable: true,
+        //    resizable: {
+        //        beforeStart: true,
+        //        afterEnd: true
+        //    }
+        //});
+        this.refresh.next();
     };
     return TimecardContainer;
 }());

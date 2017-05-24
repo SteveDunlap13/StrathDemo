@@ -14,7 +14,6 @@ import { CalendarModule } from 'angular-calendar';
 import { StrathDemoModule } from './modules/module';
 import { AppComponent }  from './app.component';
 
-
 import { Logger } from './services/logger.service';
 import { DashboardContainer } from './containers/dashboard.container';
 import { TimecardContainer } from './containers/timecard.container';
