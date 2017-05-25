@@ -27,6 +27,8 @@
       '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',   
       
       // other libraries
+      '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      'ngx-contextmenu': 'npm:ngx-contextmenu@1.1.0',
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
 
@@ -37,6 +39,7 @@
       'date-fns': 'npm:date-fns',
       'rrule': 'npm:rrule@2.2.0'
     },
+
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
@@ -52,6 +55,10 @@
       },
       'date-fns': {
         main: './index.js',
+        defaultExtension: 'js'
+      },
+      'ngx-contextmenu': {
+        main: './lib/index.js',
         defaultExtension: 'js'
       }
     }

@@ -1,137 +1,106 @@
 .gray {
-  color: #63666A !important;
-}
+  color: #63666A !important; }
 
 .green {
-  color: #78BE20 !important;
-}
+  color: #78BE20 !important; }
 
 .orange {
-  color: #F2A900 !important;
-}
+  color: #F2A900 !important; }
 
 .yellow {
-  color: #FFD800 !important;
-}
+  color: #FFD800 !important; }
 
 .blue {
-  color: #418FDE !important;
-}
+  color: #418FDE !important; }
 
 .teal {
-  color: #00AEC7 !important;
-}
+  color: #00AEC7 !important; }
 
 .red {
-  color: #F26363 !important;
-}
+  color: #F26363 !important; }
 
 .dataTable tbody tr:hover {
-  background-color: rgba(242, 169, 0, 0.6);
-}
+  background-color: rgba(242, 169, 0, 0.6); }
 
 .required, .required > button {
-  border-left: 5px solid #78BE20;
-}
+  border-left: 5px solid #78BE20; }
 
 .required-error, .required-error > button {
-  border-left: 5px solid #F26363;
-}
+  border-left: 5px solid #F26363; }
 
 li.required {
-  border-left: 5px solid #78BE20;
-}
+  border-left: 5px solid #78BE20; }
 
 .checkbox-fix {
-  width: 50px !important;
-}
+  width: 50px !important; }
 
 /********************************************************/
 .dropdown-size-xs {
-  width: 75px !important;
-}
+  width: 75px !important; }
 
 .dropdown-size-xs .btn {
   padding: 3px 6px !important;
-  font-size: 1em !important;
-}
+  font-size: 1em !important; }
 
 .dropdown-size-xs .dropdown-menu {
-  font-size: 1em !important;
-}
+  font-size: 1em !important; }
 
 /********************************************************/
 .dropdown-size-sm {
   width: 100px !important;
-  font-size: 1em !important;
-}
+  font-size: 1em !important; }
 
 .dropdown-size-sm .btn {
   padding: 3px 6px !important;
-  font-size: 1em !important;
-}
+  font-size: 1em !important; }
 
 .dropdown-size-sm .dropdown-menu {
-  font-size: 1em !important;
-}
+  font-size: 1em !important; }
 
 /********************************************************/
 .dropdown-size-md {
   width: 160px !important;
-  background-color: transparent;
-}
+  background-color: transparent; }
 
 .dropdown-size-md .btn {
-  padding: 3px 6px !important;
-}
+  padding: 3px 6px !important; }
 
 .dropdown-size-md-1 {
   width: 225px !important;
-  background-color: transparent;
-}
+  background-color: transparent; }
 
 /********************************************************/
 .dropdown-size-md-x {
   width: 200px !important;
-  background-color: transparent;
-}
+  background-color: transparent; }
 
 .dropdown-size-md-x .btn {
   padding: 3px 6px !important;
-  font-size: 12px !important;
-}
+  font-size: 12px !important; }
 
 /********************************************************/
 .txt-width-smaller {
-  max-width: 50px;
-}
+  max-width: 50px; }
 
 .txt-width-small {
-  max-width: 75px;
-}
+  max-width: 75px; }
 
 .txt-width-small-a {
-  max-width: 80px;
-}
+  max-width: 80px; }
 
 .txt-width-medium {
-  max-width: 175px;
-}
+  max-width: 175px; }
 
 .txt-width-large {
-  max-width: 200px;
-}
+  max-width: 200px; }
 
 .txt-width-larger {
-  max-width: 250px;
-}
+  max-width: 250px; }
 
 /********************************************************/
 .bootstrap-growl {
-  font-size: 1.4em;
-}
+  font-size: 1.4em; }
 
 .bootbox-body {
   font-size: 1.2em;
-  line-height: 2.0em;
-}
+  line-height: 2.0em; }

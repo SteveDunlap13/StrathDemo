@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { CalendarMonthViewDay, CalendarEvent, CalendarEventAction, 
          CalendarEventTimesChangedEvent, CalendarEventTitleFormatter } from 'angular-calendar';
-import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
+import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format, isToday } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -60,7 +60,8 @@ export class TimecardContainer implements OnInit {
                         actions: [{
                             label: '<i class="fa fa-fw fa-pencil"></i>',
                             onClick: ({event}: {event: CalendarEvent}): void => {
-                                this.handleEvent('Edited', event);
+
+                                console.log('Event: Edited', event);
                             }
                         }]
                     };
@@ -84,6 +85,13 @@ export class TimecardContainer implements OnInit {
 
     dayClicked({date, events}: {date: Date, events: TimeCardEntryEvent[]}): void {
 
+        if (isToday(date)) {
+
+            this.clickedDate = date;
+            this.activeDayIsOpen = true;
+            return;
+        }
+
         if (isSameMonth(date, this.viewDate)) {
             if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
                 this.activeDayIsOpen = false;
@@ -96,7 +104,7 @@ export class TimecardContainer implements OnInit {
     }
 
 
-    handleEvent(action: string, {event}: {event: CalendarEvent}): void {
+    handleEvent(action: string, {event}: {event: TimeCardEntryEvent}): void {
 
         console.log('Event: ' + action, event);
         //this.modalData = {event.event, action};

@@ -13,6 +13,7 @@ var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var angular_calendar_1 = require("angular-calendar");
 var module_1 = require("./modules/module");
 var app_component_1 = require("./app.component");
@@ -39,6 +40,7 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(inmemory_api_service_1.InMemoryApiService),
+            ng_bootstrap_1.NgbModalModule.forRoot(),
             angular_calendar_1.CalendarModule.forRoot(),
             module_1.StrathDemoModule,
             router_1.RouterModule.forRoot([

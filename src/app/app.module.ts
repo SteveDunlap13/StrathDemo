@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { CalendarModule } from 'angular-calendar';
@@ -36,6 +37,7 @@ import { TimecardService } from './services/timecard.service';
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryApiService),
+    NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     StrathDemoModule,
 

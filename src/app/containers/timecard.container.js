@@ -31,7 +31,6 @@ var TimecardContainer = (function () {
         this.fetchEvents();
     };
     TimecardContainer.prototype.fetchEvents = function () {
-        var _this = this;
         this.events$ = this.timecardService.getTimecardEntries()
             .map(function (data) {
             return data.map(function (timecardentry) {
@@ -45,7 +44,7 @@ var TimecardContainer = (function () {
                             label: '<i class="fa fa-fw fa-pencil"></i>',
                             onClick: function (_a) {
                                 var event = _a.event;
-                                _this.handleEvent('Edited', event);
+                                console.log('Event: Edited', event);
                             }
                         }]
                 };
@@ -62,6 +61,11 @@ var TimecardContainer = (function () {
     };
     TimecardContainer.prototype.dayClicked = function (_a) {
         var date = _a.date, events = _a.events;
+        if (date_fns_1.isToday(date)) {
+            this.clickedDate = date;
+            this.activeDayIsOpen = true;
+            return;
+        }
         if (date_fns_1.isSameMonth(date, this.viewDate)) {
             if ((date_fns_1.isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
                 this.activeDayIsOpen = false;

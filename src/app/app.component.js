@@ -15,7 +15,7 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'app',
         templateUrl: './app.component.html',
-        styleUrls: ['./css/app.component.css'],
+        styleUrls: ['app/css/app.component.css'],
         encapsulation: core_1.ViewEncapsulation.None
     })
 ], AppComponent);
