@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'angular-calendar';
 
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -14,10 +15,12 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
     CalendarModule
   ],
   declarations: [
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    HeaderComponent
   ],
   exports: [
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    HeaderComponent
   ]
 })
 export class StrathDemoModule {}

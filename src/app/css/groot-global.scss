@@ -30,11 +30,10 @@ body {
     margin: 0 auto;
 }
 
-/*.debug-size-revealer {
-    width: 10px;
-    height: 10px;
-}*/
 
+.main-container {
+    padding-top: 5rem;
+}
 
 a, a:hover {
     color: $gray !important;
@@ -63,30 +62,6 @@ input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, 
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $green-60 !important;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $green-60 !important;
     outline: 0 none !important;
-}
-
-/*input,
-select,
-textarea {
-    max-width: 280px;
-}*/
-
-.row-padding {
-    margin: 0;
-}
-
-.vertical-align {
-    display: flex;
-    align-items: center;
-}
-
-.watermark {
-    font-size: 50px;
-    color: $green;
-    opacity: 0.1;
-    position: relative;
-    top: -15px;
-    left: 20px;
 }
 
 

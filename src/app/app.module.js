@@ -15,12 +15,12 @@ var http_1 = require("@angular/http");
 var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var angular_calendar_1 = require("angular-calendar");
-var module_1 = require("./modules/module");
+var module_1 = require("./ui/module");
 var app_component_1 = require("./app.component");
 var logger_service_1 = require("./services/logger.service");
 var dashboard_container_1 = require("./containers/dashboard.container");
 var timecard_container_1 = require("./containers/timecard.container");
-var header_component_1 = require("./ui/header/header.component");
+//import { HeaderComponent }  from './ui/header/header.component';
 //import { Store } from './shared/store';
 var api_service_1 = require("./services/api.service");
 var inmemory_api_service_1 = require("./services/inmemory-api.service");
@@ -54,8 +54,7 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             dashboard_container_1.DashboardContainer,
-            timecard_container_1.TimecardContainer,
-            header_component_1.HeaderComponent
+            timecard_container_1.TimecardContainer
         ],
         providers: [
             logger_service_1.Logger,

@@ -10,6 +10,7 @@ var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var angular_calendar_1 = require("angular-calendar");
 var calendar_header_component_1 = require("./calendar-header/calendar-header.component");
+var header_component_1 = require("./header/header.component");
 var StrathDemoModule = (function () {
     function StrathDemoModule() {
     }
@@ -23,10 +24,12 @@ StrathDemoModule = __decorate([
             angular_calendar_1.CalendarModule
         ],
         declarations: [
-            calendar_header_component_1.CalendarHeaderComponent
+            calendar_header_component_1.CalendarHeaderComponent,
+            header_component_1.HeaderComponent
         ],
         exports: [
-            calendar_header_component_1.CalendarHeaderComponent
+            calendar_header_component_1.CalendarHeaderComponent,
+            header_component_1.HeaderComponent
         ]
     })
 ], StrathDemoModule);

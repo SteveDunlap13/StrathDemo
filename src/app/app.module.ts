@@ -12,14 +12,14 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CalendarModule } from 'angular-calendar';
 
-import { StrathDemoModule } from './modules/module';
+import { StrathDemoModule } from './ui/module';
 import { AppComponent }  from './app.component';
 
 import { Logger } from './services/logger.service';
 import { DashboardContainer } from './containers/dashboard.container';
 import { TimecardContainer } from './containers/timecard.container';
 
-import { HeaderComponent }  from './ui/header/header.component';
+//import { HeaderComponent }  from './ui/header/header.component';
 
 //import { Store } from './shared/store';
 
@@ -53,8 +53,7 @@ import { TimecardService } from './services/timecard.service';
   declarations: [
     AppComponent,
     DashboardContainer,
-    TimecardContainer,
-    HeaderComponent
+    TimecardContainer
   ],
   providers: [
     Logger,

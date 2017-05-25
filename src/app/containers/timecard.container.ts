@@ -1,12 +1,12 @@
 
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { CalendarMonthViewDay, CalendarEvent, CalendarEventAction, 
          CalendarEventTimesChangedEvent, CalendarEventTitleFormatter } from 'angular-calendar';
 import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format, isToday } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
-//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 //import { Store } from '../shared/store';
@@ -31,6 +31,8 @@ import { TimeCardEntry, TimeCardEntryEvent } from '../models/timecard';
 })
 export class TimecardContainer implements OnInit {
 
+    @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
     view: string = 'month';
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
@@ -39,7 +41,13 @@ export class TimecardContainer implements OnInit {
     activeDayIsOpen: boolean = true;
     clickedDate: Date;
 
-    constructor(private timecardService: TimecardService, private logger: Logger) { }
+    modalData: {
+        action: string,
+        event: TimeCardEntryEvent
+    };
+
+    constructor(private timecardService: TimecardService, private modal: NgbModal, private logger: Logger) { }
+
     ngOnInit() {
         this.fetchEvents();
     }
@@ -62,6 +70,9 @@ export class TimecardContainer implements OnInit {
                             onClick: ({event}: {event: CalendarEvent}): void => {
 
                                 console.log('Event: Edited', event);
+
+                                this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
+                                this.modal.open(this.modalContent, {size: 'lg'});
                             }
                         }]
                     };
@@ -107,8 +118,9 @@ export class TimecardContainer implements OnInit {
     handleEvent(action: string, {event}: {event: TimeCardEntryEvent}): void {
 
         console.log('Event: ' + action, event);
-        //this.modalData = {event.event, action};
-        //this.modal.open(this.modalContent, {size: 'lg'});
+
+        this.modalData = {event, action};
+        this.modal.open(this.modalContent, {size: 'lg'});
     }
 
     addEvent(): void {

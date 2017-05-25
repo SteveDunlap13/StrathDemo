@@ -2,29 +2,40 @@
   background-color: #FFFFFF;
   background-image: none;
   border: 0;
-  margin-bottom: 0 !important; }
+  border-bottom: solid 2px #78BE20;
+}
 
 .logo, .logo:hover {
   padding: .5em 0 0 .5em;
   margin-left: 10px;
-  font-size: unset; }
+  font-size: unset;
+}
 
 .logo .text {
   font-size: 2em;
   position: relative;
-  top: 8px; }
+  top: 8px;
+}
 
+/*
 .header-nav .nav > li > a {
-  padding: 10px 0 0 5px; }
+    padding: 10px 0 0 5px;
+}
 
 .header-nav .nav > li:not(:last-child) > a::after {
-  content: " |"; }
+    content: " |";
+}
 
 .navbar-text {
-  margin-top: 130px; }
+    margin-top: 130px;
+}
 
 .user-options:hover {
-  cursor: pointer; }
+    cursor: pointer;
+}
+
 
 .admin-menu {
-  padding: 0; }
+    padding: 0;
+}
+*/
