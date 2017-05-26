@@ -53,7 +53,7 @@ src/app/**/*.js
 src/app/**/*.map
 
 src/main.js
-src/main.map
+src/main.js.map
 
 # Ignore sass compiled styled sheet files
 src/app/css/**/*.css
