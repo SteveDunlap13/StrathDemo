@@ -52,6 +52,9 @@ node_modules
 src/app/**/*.js
 src/app/**/*.map
 
+src/main.js
+src/main.map
+
 # Ignore sass compiled styled sheet files
 src/app/css/**/*.css
 src/app/css/**/*.min.css
