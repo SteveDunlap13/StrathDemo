@@ -42,12 +42,14 @@ var TimecardService = (function () {
                 // .do(res => this.logger.log(JSON.stringify(res.json().data)));
         }
     */
+    TimecardService.prototype.createTimecardEvent = function (tce) {
+        return this.http.post(this.path, tce).map(function (res) { return res.json().data; });
+    };
     TimecardService.prototype.getTimecards = function () {
         return this.http.get(this.path).map(function (res) { return res.json().data; });
     };
     TimecardService.prototype.getTimecardEntries = function () {
-        return this.http.get(this.path)
-            .map(function (r) { return r.json().data; });
+        return this.http.get(this.path).map(function (r) { return r.json().data; });
     };
     return TimecardService;
 }());

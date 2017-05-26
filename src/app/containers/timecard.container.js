@@ -26,16 +26,18 @@ var TimecardContainer = (function () {
         this.view = 'month';
         this.viewDate = new Date();
         this.refresh = new Subject_1.Subject();
+        //events$: Observable<TimeCardEntryEvent[]>;
+        this.events = [];
         this.activeDayIsOpen = true;
     }
     TimecardContainer.prototype.ngOnInit = function () {
+        this.events = [];
         this.fetchEvents();
     };
     TimecardContainer.prototype.fetchEvents = function () {
         var _this = this;
-        this.events$ = this.timecardService.getTimecardEntries()
-            .map(function (data) {
-            return data.map(function (timecardentry) {
+        this.timecardService.getTimecards().subscribe(function (tce) {
+            _this.events = tce.map(function (timecardentry) {
                 return {
                     title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
                     start: new Date(),
@@ -53,7 +55,31 @@ var TimecardContainer = (function () {
                         }]
                 };
             });
+            _this.refresh.next();
+            console.log(JSON.stringify(_this.events));
         });
+        //        this.events$ = this.timecardService.getTimecardEntries()
+        //            .map(data => {
+        //                return data.map((timecardentry: TimeCardEntry) => {
+        //                    return {
+        //                        title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
+        //                        start: new Date(),
+        //                        color: timecardentry.colour,
+        //                        timecardentry: timecardentry,
+        //                        cssClass: 'test-class',
+        //                        actions: [{
+        //                            label: '<i class="fa fa-fw fa-pencil"></i>',
+        //                            onClick: ({event}: {event: CalendarEvent}): void => {
+        //
+        //                                console.log('Event: Edited', event);
+        //
+        //                                this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
+        //                                this.modal.open(this.modalContent, {size: 'lg'});
+        //                            }
+        //                        }]
+        //                    };
+        //                });
+        //            });
     };
     TimecardContainer.prototype.groupEvents = function (cell) {
         var groups = {};
@@ -88,17 +114,6 @@ var TimecardContainer = (function () {
         this.modal.open(this.modalContent, { size: 'lg' });
     };
     TimecardContainer.prototype.addEvent = function () {
-        //this.events.push({
-        //    title: 'New event',
-        //    start: startOfDay(new Date()),
-        //    end: endOfDay(new Date()),
-        //    color: colors.red,
-        //    draggable: true,
-        //    resizable: {
-        //        beforeStart: true,
-        //        afterEnd: true
-        //    }
-        //});
         this.refresh.next();
     };
     return TimecardContainer;

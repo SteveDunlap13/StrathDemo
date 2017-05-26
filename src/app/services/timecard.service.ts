@@ -42,13 +42,16 @@ export class TimecardService {
             // .do(res => this.logger.log(JSON.stringify(res.json().data)));
     }
 */
+    createTimecardEvent(tce: TimeCardEntry) {
+        return this.http.post(this.path, tce).map(res => res.json().data);
+    }
 
     getTimecards(): Observable<TimeCardEntry[]> {
 
         return this.http.get(this.path).map(res => res.json().data);
     }
+
     getTimecardEntries() {
-        return this.http.get(this.path)
-            .map(r => r.json().data);
+        return this.http.get(this.path).map(r => r.json().data);
     }
 }

@@ -11,7 +11,9 @@
 </div>
 
 
-
+<button class="btn btn-primary pull-right" (click)="addEvent()">
+  Add new
+</button>
 
 
 <ng-template #modalContent let-close="close">
@@ -55,8 +57,8 @@
 
 
 
-
-<div *ngIf="events$ | async; else loading; let events">
+<!-- <div *ngIf="events$ | async; else loading; let events"> -->
+<div>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
       *ngSwitchCase="'month'"

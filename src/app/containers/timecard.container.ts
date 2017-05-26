@@ -37,7 +37,9 @@ export class TimecardContainer implements OnInit {
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
 
-    events$: Observable<TimeCardEntryEvent[]>;
+    //events$: Observable<TimeCardEntryEvent[]>;
+    events: TimeCardEntryEvent[] = [];
+
     activeDayIsOpen: boolean = true;
     clickedDate: Date;
 
@@ -49,6 +51,8 @@ export class TimecardContainer implements OnInit {
     constructor(private timecardService: TimecardService, private modal: NgbModal, private logger: Logger) { }
 
     ngOnInit() {
+
+        this.events = [];
         this.fetchEvents();
     }
 
@@ -56,36 +60,65 @@ export class TimecardContainer implements OnInit {
 
     fetchEvents() {
 
-        this.events$ = this.timecardService.getTimecardEntries()
-            .map(data => {
-                return data.map((timecardentry: TimeCardEntry) => {
-                    return {
-                        title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
-                        start: new Date(),
-                        color: timecardentry.colour,
-                        timecardentry: timecardentry,
-                        cssClass: 'test-class',
-                        actions: [{
-                            label: '<i class="fa fa-fw fa-pencil"></i>',
-                            onClick: ({event}: {event: CalendarEvent}): void => {
+        this.timecardService.getTimecards().subscribe(tce => {
 
-                                console.log('Event: Edited', event);
+            this.events = tce.map((timecardentry: TimeCardEntry) => {
 
-                                this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
-                                this.modal.open(this.modalContent, {size: 'lg'});
-                            }
-                        }]
-                    };
-                });
+                return <TimeCardEntryEvent> {
+
+                    title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
+                    start: new Date(),
+                    color: timecardentry.colour,
+                    timecardentry: timecardentry,
+                    cssClass: 'test-class',
+                    actions: [{
+                        label: '<i class="fa fa-fw fa-pencil"></i>',
+                        onClick: ({event}: {event: CalendarEvent}): void => {
+
+                            console.log('Event: Edited', event);
+
+                            this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
+                            this.modal.open(this.modalContent, {size: 'lg'});
+                        }
+                    }]
+                };
+
             });
+
+            this.refresh.next();
+            console.log(JSON.stringify(this.events));
+        });
+
+//        this.events$ = this.timecardService.getTimecardEntries()
+//            .map(data => {
+//                return data.map((timecardentry: TimeCardEntry) => {
+//                    return {
+//                        title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
+//                        start: new Date(),
+//                        color: timecardentry.colour,
+//                        timecardentry: timecardentry,
+//                        cssClass: 'test-class',
+//                        actions: [{
+//                            label: '<i class="fa fa-fw fa-pencil"></i>',
+//                            onClick: ({event}: {event: CalendarEvent}): void => {
+//
+//                                console.log('Event: Edited', event);
+//
+//                                this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
+//                                this.modal.open(this.modalContent, {size: 'lg'});
+//                            }
+//                        }]
+//                    };
+//                });
+//            });
     }
 
     groupEvents(cell: CalendarMonthViewDay): void {
 
         const groups: any = {};
         cell.events.forEach((event: TimeCardEntryEvent) => {
-        groups[event.timecardentry.workTask] = groups[event.timecardentry.workTask] || [];
-        groups[event.timecardentry.workTask].push(event);
+            groups[event.timecardentry.workTask] = groups[event.timecardentry.workTask] || [];
+            groups[event.timecardentry.workTask].push(event);
         });
         cell['eventGroups'] = (<any>Object).entries(groups);
     }
@@ -125,17 +158,6 @@ export class TimecardContainer implements OnInit {
 
     addEvent(): void {
 
-        //this.events.push({
-        //    title: 'New event',
-        //    start: startOfDay(new Date()),
-        //    end: endOfDay(new Date()),
-        //    color: colors.red,
-        //    draggable: true,
-        //    resizable: {
-        //        beforeStart: true,
-        //        afterEnd: true
-        //    }
-        //});
         this.refresh.next();
     }
 }
