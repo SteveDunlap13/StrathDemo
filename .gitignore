@@ -47,3 +47,11 @@ Temporary Items
 .apdisk
 
 node_modules
+
+# Ignore typescript compiled files under src/app
+src/app/**/*.js
+src/app/**/*.map
+
+# Ignore sass compiled styled sheet files
+src/app/css/**/*.css
+src/app/css/**/*.min.css
