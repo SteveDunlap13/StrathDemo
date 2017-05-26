@@ -5,16 +5,18 @@
   [(viewDate)]="viewDate">
 </calendar-header>
 
-<div class="alert alert-info">
-  Click on a day on the view.
-  <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'medium' }}</strong>
+<br/>
+
+<div class="card">
+  <div class="card-header">
+  Info area
+  </div>
+  <div class="card-block">
+    <h4 class="card-title">Click on a day on the view.</h4>
+    <p class="card-text" *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'medium' }}</p>
+    <a href="#" class="btn btn-primary" (click)="addEvent()">Add event</a>
+  </div>
 </div>
-
-
-<button class="btn btn-primary pull-right" (click)="addEvent()">
-  Add new
-</button>
-
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
@@ -48,7 +50,7 @@
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
   <div class="cell-totals">
-    <span *ngFor="let group of day.eventGroups" class="badge badge-{{ group[0] }}">
+    <span *ngFor="let group of day.eventGroups" class="badge badge-{{ group[0] }}" [style.background-color]="getColour(group[1])">
       {{ group[1].length }}
     </span>
   </div>
@@ -57,7 +59,6 @@
 
 
 
-<!-- <div *ngIf="events$ | async; else loading; let events"> -->
 <div>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view

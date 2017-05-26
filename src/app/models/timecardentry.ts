@@ -8,9 +8,10 @@ export interface TimeCardEntry {
     employee: Employee;
     eventstart: Date;
     eventend: Date;
-    workTask: string;
+    worktask: string;
     value: number;
     colour: {};
+    badgecolor?: string;
 }
 
 export interface TimeCardEntryEvent extends CalendarEvent {
