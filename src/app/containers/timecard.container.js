@@ -56,7 +56,7 @@ var TimecardContainer = (function () {
                 };
             });
             _this.refresh.next();
-            console.log(JSON.stringify(_this.events));
+            //console.log(JSON.stringify(this.events));
         });
         //        this.events$ = this.timecardService.getTimecardEntries()
         //            .map(data => {

@@ -86,7 +86,7 @@ export class TimecardContainer implements OnInit {
             });
 
             this.refresh.next();
-            console.log(JSON.stringify(this.events));
+            //console.log(JSON.stringify(this.events));
         });
 
 //        this.events$ = this.timecardService.getTimecardEntries()
