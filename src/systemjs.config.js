@@ -27,17 +27,17 @@
       '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',   
       
       // other libraries
-      '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
-      'ngx-contextmenu': 'npm:ngx-contextmenu@1.1.0',
-      'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-
       'angular-calendar': 'npm:angular-calendar/dist/umd/angular-calendar.js',
       'calendar-utils': 'npm:calendar-utils/dist/umd/calendarUtils.js',
       'angular-resizable-element': 'npm:angular-resizable-element/dist/umd/angular-resizable-element.js',
       'angular-draggable-droppable': 'npm:angular-draggable-droppable/dist/umd/angular-draggable-droppable.js',
       'date-fns': 'npm:date-fns',
-      'rrule': 'npm:rrule@2.2.0'
+
+      '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      'rxjs': 'npm:rxjs',
+      'rrule': 'npm:rrule@2.2.0',
+
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
     },
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -55,10 +55,6 @@
       },
       'date-fns': {
         main: './index.js',
-        defaultExtension: 'js'
-      },
-      'ngx-contextmenu': {
-        main: './lib/index.js',
         defaultExtension: 'js'
       }
     }

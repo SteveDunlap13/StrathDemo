@@ -11,7 +11,8 @@ export interface TimeCardEntry {
     worktask: string;
     value: number;
     colour: {};
-    badgecolor?: string;
+    badgecolour?: string;
+    allDay: boolean;
 }
 
 export interface TimeCardEntryEvent extends CalendarEvent {

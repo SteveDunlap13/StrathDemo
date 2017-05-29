@@ -21,16 +21,16 @@ export class TimecardService {
     constructor(private http: Http, private logger: Logger) { }
 
 
-//    createTimecardEvent(tce: TimeCardEntry) {
-//        return this.http.post(this.path, tce).map(res => res.json().data);
-//    }
-//
-    getTimecards(): Observable<TimeCardEntry[]> {
+    createTimeCardEntry(tce: TimeCardEntry) {
+        return this.http.post(this.path, tce).map(res => res.json());
+    }
+
+    getTimeCardEntries(): Observable<TimeCardEntry[]> {
 
         return this.http.get(this.path).map(res => res.json().data);
     }
 
-//    getTimecardEntries() {
-//        return this.http.get(this.path).map(r => r.json().data);
-//    }
+    updateTimeCardEntry(tce: TimeCardEntry) {
+        return this.http.put(this.path + '/' + tce.id, tce).map(res => res.json());
+    }
 }
