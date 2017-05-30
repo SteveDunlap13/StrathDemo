@@ -22,9 +22,9 @@
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
-      '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
       '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',   
+      '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
       
       // other libraries
       'angular-calendar': 'npm:angular-calendar/dist/umd/angular-calendar.js',
@@ -34,6 +34,7 @@
       'date-fns': 'npm:date-fns',
 
       '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      //'ngx-contextmenu': 'npm:ngx-contextmenu@1.1.0',
       'rxjs': 'npm:rxjs',
       'rrule': 'npm:rrule@2.2.0',
 
@@ -55,6 +56,10 @@
       },
       'date-fns': {
         main: './index.js',
+        defaultExtension: 'js'
+      },
+      'ngx-contextmenu': {
+        main: './lib/index.js',
         defaultExtension: 'js'
       }
     }

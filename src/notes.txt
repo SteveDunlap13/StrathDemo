@@ -2,4 +2,26 @@
 
 - add event modal (forms)
 
+- ngx-contextmenu doesn't work thru system loader, known bubg #5
 
+- 
+
+
+      <a addEventButton href="#" class="btn btn-primary" (click)="addEvent()">Add event</a>
+      {{ day.date | calendarDate:'monthViewDayNumber':locale }}
+
+
+
+- show holidays
+- need an add event button somewhere?  or click hour in day view???
+    - button seems better (outside calendar for full access)
+
+
+- precision="minutes" in week view... but i got not times in my mock data
+
+- scss files aren't forcing a broewser reload look at gulp task
+
+- scroll to event???
+- show day event hour total instead of total events
+- add event is in calendar-header
+    - its event needs to be fulfilled in timecard-container... how?  emit it?  event emitter?

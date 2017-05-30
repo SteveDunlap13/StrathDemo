@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { ContextMenuModule } from 'ngx-contextmenu';
 
 
 import { CalendarModule } from 'angular-calendar';
@@ -36,9 +35,6 @@ import { TimecardService } from './services/timecard.service';
     InMemoryWebApiModule.forRoot(InMemoryApiService),
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
-    ContextMenuModule.forRoot({
-      useBootstrap4: true
-    }),
     StrathDemoModule,
 
     RouterModule.forRoot([

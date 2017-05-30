@@ -2,8 +2,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 
 import { CalendarMonthViewDay, CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter } from 'angular-calendar';
-import { isSameMonth, isSameDay, startOfMonth, endOfMonth, 
-         startOfWeek, endOfWeek, startOfDay, endOfDay, 
+import { isSameMonth, isSameDay, startOfMonth, endOfMonth,
+         startOfWeek, endOfWeek, startOfDay, endOfDay,
          format, isToday, isWeekend, addDays, addHours } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +31,7 @@ export class TimecardContainer implements OnInit {
 
     @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-    view: string = 'month';
+    view = 'month';
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
 
@@ -61,7 +61,7 @@ export class TimecardContainer implements OnInit {
             });
             day['eventGroups'] = (<any>Object).entries(groups);
 
-            if (isWeekend(day.date)) {//.getDate() % 2 === 1 && cell.inMonth) {
+            if (isWeekend(day.date)) {
                 day.cssClass = 'odd-cell';
             }
             if (day.events.length > 0) {

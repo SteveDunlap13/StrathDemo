@@ -75,3 +75,9 @@ input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, 
 .events-found-cell {
     background-color: $green-60 !important;
 }
+
+.groot-calendar-container {
+  padding-top: .5rem;
+  max-height: 50rem;
+  overflow-y: scroll;
+}
