@@ -9,10 +9,6 @@
 - fyi precision="minutes" in week view
     - but i got not times in my mock data so prob not useful
 
-- show day event hour total instead of total events in motnh view
+- show day event hour total instead of total events in month view
 
-
-- displaying day view may not be needed as events prob wont have timess
-    - so month and week views...
-    - events have a duration value
 

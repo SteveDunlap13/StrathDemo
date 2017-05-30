@@ -57,17 +57,6 @@
 
 
 
-<ng-template #dayHourSegmentTemplate let-segment="segment" let-locale="locale">
-  <div
-    class="cal-hour-segment"
-    [ngClass]="segment.cssClass">
-    <div [hidden]="!segment.isStart" class="cal-time">
-      {{ segment.date | calendarDate:'dayViewHour':locale }}
-    </div>
-  </div>
-</ng-template>
-
-
 
 
 <div class="row ">
@@ -87,7 +76,7 @@
       [events]="events"
       [refresh]="refresh"
       [dayModifier]="groupEvents"
-      (dayClicked)="viewDate = $event.day.date; view = 'day'"
+      (dayClicked)="viewDate = $event.day.date; view = 'week'"
       (eventClicked)="handleEvent('Clicked', $event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       [cellTemplate]="monthCellTemplate"
@@ -99,23 +88,12 @@
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      (dayClicked)="viewDate = $event.date; view = 'day'"
+      (dayClicked)="viewDate = $event.date"
       (eventClicked)="handleEvent('Clicked', $event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       [headerTemplate]="weekHeaderTemplate"
       >
     </mwl-calendar-week-view>
-
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      [hourSegmentTemplate]="dayHourSegmentTemplate"
-      >
-    </mwl-calendar-day-view>
 
   </div>
 </div>

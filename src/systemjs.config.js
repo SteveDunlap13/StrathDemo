@@ -57,10 +57,6 @@
       'date-fns': {
         main: './index.js',
         defaultExtension: 'js'
-      },
-      'ngx-contextmenu': {
-        main: './lib/index.js',
-        defaultExtension: 'js'
       }
     }
   });
