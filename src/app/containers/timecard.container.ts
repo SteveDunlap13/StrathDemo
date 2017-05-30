@@ -134,8 +134,6 @@ export class TimecardContainer implements OnInit {
     // Add a new timecard entry
     addEvent(date: Date): void {
 
-console.log(date);
-
         this.tceid++;
 
         // add event to api
@@ -168,5 +166,17 @@ console.log(date);
             //.subscribe(res => console.log(JSON.stringify(res)));
 
         this.refresh.next();
+    }
+
+
+
+    getHours(events: TimeCardEntryEvent[]) {
+
+        return events.reduce((a, v) => a + v.timecardentry.value, 0);
+    }
+    xxx(events: TimeCardEntryEvent[]) {
+
+        console.log(JSON.stringify(events));
+
     }
 }
