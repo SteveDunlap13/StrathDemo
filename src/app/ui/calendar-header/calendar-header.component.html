@@ -18,7 +18,7 @@
         </div>
 
         <div class="col-4">
-          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h3>
+          <p>{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</p>
         </div>
 
         <div class="col-4">
@@ -39,7 +39,7 @@
 
     <div class="col-4 text-right">
       <!-- calendar commands -->
-      <a addEventButton href="#" class="btn btn-sm btn-primary" (click)="addEvent()">Add event</a>
+      <a addEventButton href="#" class="btn btn-sm btn-primary" (click)="addEvent.emit(viewDate)">Add</a>
     </div>
 </div>
     

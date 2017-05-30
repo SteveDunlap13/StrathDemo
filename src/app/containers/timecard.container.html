@@ -74,7 +74,8 @@
   <div class="col-12">
     <calendar-header
       [(view)]="view"
-      [(viewDate)]="viewDate">
+      [(viewDate)]="viewDate"
+      (addEvent)="addEvent($event)">
     </calendar-header>
   </div>
 

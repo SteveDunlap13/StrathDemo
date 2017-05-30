@@ -4,7 +4,7 @@
     "isShellCommand": true,
     "tasks": [
         {
-            "taskName": "default",
+            "taskName": "sass:watch",
             "isBuildCommand": true,
             "showOutput": "always",
             "isBackground": true

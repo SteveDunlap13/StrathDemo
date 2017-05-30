@@ -125,12 +125,16 @@ export class TimecardContainer implements OnInit {
 
         this.modalData = {event, action};
         this.modal.open(this.modalContent, {size: 'lg'});
+
+        console.log(format(event.start, '[Week] W [of] MMM, YYYY'));
     }
 
 
 
     // Add a new timecard entry
     addEvent(date: Date): void {
+
+console.log(date);
 
         this.tceid++;
 
