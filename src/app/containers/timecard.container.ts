@@ -40,7 +40,8 @@ export class TimecardContainer implements OnInit {
 
     modalData: {
         action: string,
-        event: TimeCardEntryEvent
+        event: TimeCardEntryEvent,
+        timecardentry: TimeCardEntry
     };
 
     selectedDay: CalendarMonthViewDay;
@@ -110,14 +111,14 @@ export class TimecardContainer implements OnInit {
                     allDay: timecardentry.allDay,
                     actions: [{
                         label: '<i class="fa fa-fw fa-pencil"></i>',
-                        onClick: ({event}: {event: CalendarEvent}): void => {
+                        onClick: ({event}: {event: TimeCardEntryEvent}): void => {
 
-                            console.log('Event: Edited', event);
+                            //console.log('Event: Edited', event.timecardentry);
+                            this.modalData = { action: 'Edited',
+                                               event: (<TimeCardEntryEvent>event),
+                                               timecardentry: (<TimeCardEntryEvent>event).timecardentry };
 
-                            this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
-
-                            const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg' });
-                            modalRef.componentInstance.modalData = this.modalData;
+                            this.openModal();
                         }
                     }]
                 };
@@ -133,12 +134,19 @@ export class TimecardContainer implements OnInit {
 
 
 
-    // Open modal dialog for click event
+    // Handle timecard entry click event
     handleEvent(action: string, {event}: {event: TimeCardEntryEvent}): void {
 
-        console.log('Event: ' + action, event);
+        //console.log('Event: ' + action, event);
+        this.modalData = { action: action,
+                            event: event,
+                            timecardentry: event.timecardentry };
 
-        this.modalData = {event, action};
+        this.openModal();
+    }
+
+    openModal(): void {
+
         const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg' });
         modalRef.componentInstance.modalData = this.modalData;
     }

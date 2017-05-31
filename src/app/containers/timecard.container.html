@@ -50,8 +50,6 @@
       [refresh]="refresh"
       [dayModifier]="groupEvents"
       (dayClicked)="viewDate = $event.day.date; view = 'week'"
-      (eventClicked)="handleEvent('Clicked', $event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
       [cellTemplate]="monthCellTemplate"
       >
     </mwl-calendar-month-view>

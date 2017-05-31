@@ -6,15 +6,38 @@
   </button>
 </div>
 <div class="modal-body">
-  <div>
+
+    <form>
+      <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" id="firstname" required [(ngModel)]="modalData.timecardentry.employee.firstname" name="firstname">
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" id="lastname" required [(ngModel)]="modalData.timecardentry.employee.lastname" name="lastname">
+      </div>
+
+      <div class="form-group">
+        <label for="worktask">Work Task</label>
+        <select class="form-control" id="worktask" required [(ngModel)]="modalData.timecardentry.worktask" name="worktask">
+          <option *ngFor="let w of worktasks" [value]="w">{{ w }}</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+  <!--<div>
     Action:
     <pre>{{ modalData?.action }}</pre>
   </div>
   <div>
     Event:
     <pre>{{ modalData?.event | json }}</pre>
-  </div>
+  </div>-->
 </div>
+
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">OK</button>
 </div>

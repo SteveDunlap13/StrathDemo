@@ -1,24 +1,26 @@
 
+Issues
+---------
+- ngx-contextmenu doesn't work thru system loader, known bug #5
+- week view, selected day needs css colour
+    - asked on github, I see no event handler there...
 
+
+
+TODO
+-------
 - add event modal (forms)
     - drop downs...
     - edit
     - delete
 
 
-- ngx-contextmenu doesn't work thru system loader, known bug #5
-
 - show holidays (api business logic)
-
-- fyi precision="minutes" in week view
-    - but i got not times in my mock data so prob not useful
-
-- week view, selected day needs css colour
 
 - need basic authorization to admin levels that manage work tasks, projects and inititatives
 
-- ui header
-- bootstrap theme
+- ui header (cleanup?)
+    - bootstrap theme?
 
 - email notifications on status of completed events
 
@@ -26,5 +28,10 @@
     - need username and possibly employee id
 
 
+Info
+-------
 - NgbModal info
     - https://ng-bootstrap.github.io/#/components/modal
+- Angular forms
+    - https://angular.io/docs/ts/latest/guide/forms.html
+- 
