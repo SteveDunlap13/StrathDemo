@@ -5,22 +5,22 @@
       <div class="row text-center">
         <div class="col-4">
           <div class="btn-group btn-group-sm">
-            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+            <div class="btn btn-outline-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
               Previous
             </div>
-            <div class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
               Today
             </div>
-            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+            <div class="btn btn-outline-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
               Next
             </div>
           </div>
 
           <div class="btn-group btn-group-sm">
-            <div class="btn btn-primary" (click)="viewChange.emit('month')" [class.active]="view === 'month'">
+            <div class="btn btn-outline-primary" (click)="viewChange.emit('month')" [class.active]="view === 'month'">
               Month
             </div>
-            <div class="btn btn-primary" (click)="viewChange.emit('week')" [class.active]="view === 'week'">
+            <div class="btn btn-outline-primary" (click)="viewChange.emit('week')" [class.active]="view === 'week'">
               Week
             </div>
           </div>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-8">
-          <p>{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</p>
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h3>
         </div>
 
       </div>
@@ -36,7 +36,7 @@
 
     <div class="col-4 text-right">
       <!-- calendar commands -->
-      <a addEventButton href="#" class="btn btn-sm btn-primary" (click)="addEvent.emit(viewDate)">Add</a>
+      <!--<a addEventButton href="#" class="btn btn-sm btn-outline-success" (click)="addEvent.emit(viewDate)"><i class="fa fa-icon fa-plus"> Add</i></a>-->
     </div>
 </div>
     

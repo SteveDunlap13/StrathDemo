@@ -9,13 +9,14 @@ import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
-import { EventTitleFormatter } from '../providers/event-title-formatter.provider';
+import { EventTitleFormatter } from '../formatters/index';
 import { COLOURS } from '../shared/colours';
 
 import { TimecardService } from '../services/timecard.service';
 import { Logger } from '../services/logger.service';
 
 import { TimeCardEntry, TimeCardEntryEvent } from '../models/timecardentry';
+import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.component';
 
 
 @Component({
@@ -28,8 +29,6 @@ import { TimeCardEntry, TimeCardEntryEvent } from '../models/timecardentry';
     }]
 })
 export class TimecardContainer implements OnInit {
-
-    @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
     view = 'month';
     viewDate: Date = new Date();
@@ -44,7 +43,15 @@ export class TimecardContainer implements OnInit {
         event: TimeCardEntryEvent
     };
 
-    constructor(private timecardService: TimecardService, private modal: NgbModal, private logger: Logger) { }
+    selectedDay: CalendarMonthViewDay;
+    selectDay: (day: CalendarMonthViewDay) => void;
+
+
+
+    constructor(private timecardService: TimecardService,
+                private modal: NgbModal,
+                private logger: Logger,
+                private modalService: NgbModal) { }
 
     ngOnInit() {
 
@@ -66,6 +73,13 @@ export class TimecardContainer implements OnInit {
             }
             if (day.events.length > 0) {
                 day.cssClass = 'events-found-cell';
+            }
+        };
+
+
+        this.selectDay = (day: CalendarMonthViewDay): void => {
+            if (this.selectedDay && day.date.getTime() === this.selectedDay.date.getTime()) {
+                day.cssClass = 'cal-week-selected';
             }
         };
     }
@@ -101,7 +115,9 @@ export class TimecardContainer implements OnInit {
                             console.log('Event: Edited', event);
 
                             this.modalData = {event: <TimeCardEntryEvent> event, action: 'Edited'};
-                            this.modal.open(this.modalContent, {size: 'lg'});
+
+                            const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg' });
+                            modalRef.componentInstance.modalData = this.modalData;
                         }
                     }]
                 };
@@ -109,7 +125,6 @@ export class TimecardContainer implements OnInit {
             });
 
             this.refresh.next();
-            //console.log(JSON.stringify(this.events));
         });
     }
 
@@ -118,15 +133,14 @@ export class TimecardContainer implements OnInit {
 
 
 
-    // Open modal dialog for click or edit event
+    // Open modal dialog for click event
     handleEvent(action: string, {event}: {event: TimeCardEntryEvent}): void {
 
         console.log('Event: ' + action, event);
 
         this.modalData = {event, action};
-        this.modal.open(this.modalContent, {size: 'lg'});
-
-        console.log(format(event.start, '[Week] W [of] MMM, YYYY'));
+        const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg' });
+        modalRef.componentInstance.modalData = this.modalData;
     }
 
 
@@ -169,14 +183,10 @@ export class TimecardContainer implements OnInit {
     }
 
 
-
+    // Return a sum of timecard entry hours for a given set of events
+    // Used in month badge displays (total and grouped)
     getHours(events: TimeCardEntryEvent[]) {
 
         return events.reduce((a, v) => a + v.timecardentry.value, 0);
-    }
-    xxx(events: TimeCardEntryEvent[]) {
-
-        console.log(JSON.stringify(events));
-
     }
 }

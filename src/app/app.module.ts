@@ -12,7 +12,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CalendarModule } from 'angular-calendar';
 
-import { StrathDemoModule } from './ui/module';
+import { StrathDemoUIModule } from './ui/module';
 import { AppComponent }  from './app.component';
 
 import { Logger } from './services/logger.service';
@@ -35,7 +35,7 @@ import { TimecardService } from './services/timecard.service';
     InMemoryWebApiModule.forRoot(InMemoryApiService),
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
-    StrathDemoModule,
+    StrathDemoUIModule,
 
     RouterModule.forRoot([
           {
@@ -51,6 +51,7 @@ import { TimecardService } from './services/timecard.service';
     DashboardContainer,
     TimecardContainer
   ],
+
   providers: [
     Logger,
     ApiService,

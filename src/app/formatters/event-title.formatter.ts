@@ -2,6 +2,7 @@
 import { LOCALE_ID, Inject } from '@angular/core';
 import { CalendarEventTitleFormatter, CalendarEvent } from 'angular-calendar';
 
+
 export class EventTitleFormatter extends CalendarEventTitleFormatter {
 
   constructor(@Inject(LOCALE_ID) private locale: string) {

@@ -5,7 +5,7 @@ import { CalendarModule } from 'angular-calendar';
 
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { HeaderComponent } from './header/header.component';
-
+import { TimeCardEntryComponent } from './timecard-entry/timecard-entry.component';
 
 
 @NgModule({
@@ -14,13 +14,20 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     CalendarModule
   ],
+
+  entryComponents: [
+    TimeCardEntryComponent
+  ],
+
   declarations: [
     CalendarHeaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    TimeCardEntryComponent
   ],
+
   exports: [
     CalendarHeaderComponent,
     HeaderComponent
   ]
 })
-export class StrathDemoModule {}
+export class StrathDemoUIModule {}

@@ -22,3 +22,9 @@
 
 - email notifications on status of completed events
 
+- AD integration
+    - need username and possibly employee id
+
+
+- NgbModal info
+    - https://ng-bootstrap.github.io/#/components/modal

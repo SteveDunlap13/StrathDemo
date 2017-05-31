@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { CalendarDateFormatter } from 'angular-calendar';
-import { CustomCalendarDateFormatter } from '../../providers/calendar-date-formatter.provider';
+import { CustomCalendarDateFormatter } from '../../formatters/index';
 
 
 @Component({
