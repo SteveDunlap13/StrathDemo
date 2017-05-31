@@ -1,15 +1,18 @@
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { TIMECARDENTRIES } from '../models/mock-timecardentries';
+import { TIMECARDENTRIES, WORKTYPES, PIWORKTYPES, WORKTASKS } from '../models/index';
 
 
 export class InMemoryApiService implements InMemoryDbService {
 
   createDb() {
 
-    let timesheet = TIMECARDENTRIES;
+    let timecardentries = TIMECARDENTRIES;
+    let worktypes = WORKTYPES;
+    let piworktypes = PIWORKTYPES;
+    let worktasks = WORKTASKS;
 
-    return { timesheet };
+    return { timecardentries, worktypes, piworktypes, worktasks };
   }
 }

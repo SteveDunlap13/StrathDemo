@@ -9,8 +9,8 @@ Issues
 
 TODO
 -------
-- add event modal (forms)
-    - drop downs...
+- modal form(s)
+    - add
     - edit
     - delete
 
@@ -26,6 +26,8 @@ TODO
 
 - AD integration
     - need username and possibly employee id
+
+- forms not showing my css???
 
 
 Info

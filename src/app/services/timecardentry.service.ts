@@ -6,15 +6,15 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { TimeCardEntry } from '../models/timecardentry';
+import { TimeCardEntry } from '../models/index';
 
 import { Logger } from '../services/logger.service';
 
 
 @Injectable()
-export class TimecardService {
+export class TimecardEntryService {
 
-    path: string = '/api/timesheet';
+    path: string = '/api/timecardentries';
 
     // constructor(private apiService: ApiService, private storeHelperService: StoreHelperService) { }
     //constructor(private http: Http, private storeHelperService: StoreHelperService, private logger: Logger) { }

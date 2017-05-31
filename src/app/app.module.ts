@@ -12,17 +12,16 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CalendarModule } from 'angular-calendar';
 
+
 import { StrathDemoUIModule } from './ui/module';
 import { AppComponent }  from './app.component';
 
-import { Logger } from './services/logger.service';
 import { DashboardContainer } from './containers/dashboard.container';
 import { TimecardContainer } from './containers/timecard.container';
 
 
-import { ApiService } from './services/api.service';
-import { InMemoryApiService }     from './services/inmemory-api.service';
-import { TimecardService } from './services/timecard.service';
+import { Logger, ApiService, InMemoryApiService, PIWorkTypeService,
+         TimecardEntryService, WorkTaskService, WorkTypeService } from './services/index';
 
 
 @NgModule({
@@ -55,7 +54,10 @@ import { TimecardService } from './services/timecard.service';
   providers: [
     Logger,
     ApiService,
-    TimecardService
+    TimecardEntryService,
+    WorkTypeService,
+    PIWorkTypeService,
+    WorkTaskService
   ],
 
   bootstrap:    [ AppComponent ]

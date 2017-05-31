@@ -5,37 +5,55 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+
 <div class="modal-body">
 
     <form>
       <div class="form-group">
-        <label for="firstname">First Name</label>
-        <input type="text" class="form-control" id="firstname" required [(ngModel)]="modalData.timecardentry.employee.firstname" name="firstname">
+        <label for="worktype">Type</label>
+        <select class="form-control form-control-sm" id="worktype" name="worktype"
+                required 
+                [(ngModel)]="modalData.timecardentry.worktype.id"
+                (change)="worktypeChanged($event.target.selectedIndex)">
+          <option *ngFor="let w of worktypes" [value]="w.id">{{ w.name }}</option>
+        </select>
       </div>
 
-      <div class="form-group">
-        <label for="lastname">Last Name</label>
-        <input type="text" class="form-control" id="lastname" required [(ngModel)]="modalData.timecardentry.employee.lastname" name="lastname">
+      <div class="form-group" *ngIf="modalData.timecardentry.worktype.type != 'O'">
+        <label for="piworktype">Project / Initiative</label>
+        <select class="form-control form-control-sm required" id="piworktype" name="piworktype"
+                required 
+                [(ngModel)]="modalData.timecardentry.piworktype.id">
+          <option *ngFor="let w of piworktypes | piworktypefilter : modalData.timecardentry.worktype.type" [value]="w.id">{{ w.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group" *ngIf="modalData.timecardentry.worktype.type == 'O'">
+        <label for="worktypedescription">Description</label>
+        <input type="text" class="form-control form-control-sm required" id="worktypedescription" name="worktypedescription"
+               required 
+               [(ngModel)]="modalData.timecardentry.worktypedescription">
       </div>
 
       <div class="form-group">
         <label for="worktask">Work Task</label>
-        <select class="form-control" id="worktask" required [(ngModel)]="modalData.timecardentry.worktask" name="worktask">
-          <option *ngFor="let w of worktasks" [value]="w">{{ w }}</option>
+        <select class="form-control form-control-sm required dropdown-size-sm" id="worktask" name="worktask"
+                required 
+                [(ngModel)]="modalData.timecardentry.worktask.id">
+          <option *ngFor="let w of worktasks" [value]="w.id">{{ w.name }}</option>
         </select>
       </div>
+
+      <div class="form-group">
+        <label for="value">Hours</label>
+        <input type="text" class="form-control form-control-sm required" id="value" name="value"
+               required 
+               [(ngModel)]="modalData.timecardentry.value">
+      </div>
       
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success">Save</button>
     </form>
 
-  <!--<div>
-    Action:
-    <pre>{{ modalData?.action }}</pre>
-  </div>
-  <div>
-    Event:
-    <pre>{{ modalData?.event | json }}</pre>
-  </div>-->
 </div>
 
 <div class="modal-footer">

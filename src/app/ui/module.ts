@@ -7,6 +7,8 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
 import { HeaderComponent } from './header/header.component';
 import { TimeCardEntryComponent } from './timecard-entry/timecard-entry.component';
 
+import { PIWorkTypeFilterPipe } from '../pipes/index';
+
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import { TimeCardEntryComponent } from './timecard-entry/timecard-entry.componen
   ],
 
   declarations: [
+    PIWorkTypeFilterPipe,
     CalendarHeaderComponent,
     HeaderComponent,
     TimeCardEntryComponent

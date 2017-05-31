@@ -12,10 +12,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventTitleFormatter } from '../formatters/index';
 import { COLOURS } from '../shared/colours';
 
-import { TimecardService } from '../services/timecard.service';
+import { TimecardEntryService } from '../services/index';
 import { Logger } from '../services/logger.service';
 
-import { TimeCardEntry, TimeCardEntryEvent } from '../models/timecardentry';
+import { TimeCardEntry, TimeCardEntryEvent } from '../models/index';
 import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.component';
 
 
@@ -49,7 +49,7 @@ export class TimecardContainer implements OnInit {
 
 
 
-    constructor(private timecardService: TimecardService,
+    constructor(private timecardEntryService: TimecardEntryService,
                 private modal: NgbModal,
                 private logger: Logger,
                 private modalService: NgbModal) { }
@@ -64,8 +64,8 @@ export class TimecardContainer implements OnInit {
 
             const groups: any = {};
             day.events.forEach((event: TimeCardEntryEvent) => {
-                groups[event.timecardentry.worktask] = groups[event.timecardentry.worktask] || [];
-                groups[event.timecardentry.worktask].push(event);
+                groups[event.timecardentry.worktype.name] = groups[event.timecardentry.worktype.name] || [];
+                groups[event.timecardentry.worktype.name].push(event);
             });
             day['eventGroups'] = (<any>Object).entries(groups);
 
@@ -87,9 +87,9 @@ export class TimecardContainer implements OnInit {
 
 
 
-    fetchEvents() {
+    fetchEvents(): void {
 
-        this.timecardService.getTimeCardEntries().subscribe(tce => {
+        this.timecardEntryService.getTimeCardEntries().subscribe(tce => {
 
             this.events = tce.map((timecardentry: TimeCardEntry) => {
 
@@ -102,13 +102,12 @@ export class TimecardContainer implements OnInit {
                     end: new Date(timecardentry.eventend),
                     color: timecardentry.colour,
                     timecardentry: timecardentry,
-                    cssClass: 'test-class',
+                    //cssClass: 'test-class',
                     draggable: true,
                     resizable: {
                         beforeStart: true, // this allows you to configure the sides the event is resizable from
                         afterEnd: true
                     },
-                    allDay: timecardentry.allDay,
                     actions: [{
                         label: '<i class="fa fa-fw fa-pencil"></i>',
                         onClick: ({event}: {event: TimeCardEntryEvent}): void => {
@@ -145,6 +144,8 @@ export class TimecardContainer implements OnInit {
         this.openModal();
     }
 
+
+
     openModal(): void {
 
         const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg' });
@@ -156,22 +157,21 @@ export class TimecardContainer implements OnInit {
     // Add a new timecard entry
     addEvent(date: Date): void {
 
-        this.tceid++;
+//        this.tceid++;
+//
+//        // add event to api
+//        this.timecardService.createTimeCardEntry({
+//            id: this.tceid,
+//            employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+//            eventstart: date,
+//            eventend: addHours(date, 1),
+//            worktask: 'Development',
+//            value: 7.5,
+//            colour: COLOURS.red,
+//            badgecolour: COLOURS.red.primary
+//        }).subscribe(res => console.log(JSON.stringify(res)));
 
-        // add event to api
-        this.timecardService.createTimeCardEntry({
-            id: this.tceid,
-            employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
-            eventstart: date,
-            eventend: addHours(date, 1),
-            worktask: 'Development',
-            value: 7.5,
-            colour: COLOURS.red,
-            badgecolour: 'red',
-            allDay: false
-        }).subscribe(res => console.log(JSON.stringify(res)));
-
-        this.fetchEvents();
+//        this.fetchEvents();
     }
 
 
@@ -184,7 +184,7 @@ export class TimecardContainer implements OnInit {
         (<TimeCardEntryEvent>event).timecardentry.eventstart = newStart;
         (<TimeCardEntryEvent>event).timecardentry.eventend = newEnd;
 
-        this.timecardService.updateTimeCardEntry((<TimeCardEntryEvent>event).timecardentry);
+        this.timecardEntryService.updateTimeCardEntry((<TimeCardEntryEvent>event).timecardentry);
             //.subscribe(res => console.log(JSON.stringify(res)));
 
         this.refresh.next();

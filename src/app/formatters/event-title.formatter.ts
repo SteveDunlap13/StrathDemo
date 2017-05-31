@@ -1,6 +1,7 @@
 
 import { LOCALE_ID, Inject } from '@angular/core';
 import { CalendarEventTitleFormatter, CalendarEvent } from 'angular-calendar';
+import { TimeCardEntryEvent } from '../models/index';
 
 
 export class EventTitleFormatter extends CalendarEventTitleFormatter {
@@ -10,15 +11,10 @@ export class EventTitleFormatter extends CalendarEventTitleFormatter {
   }
 
 
-  month(event: CalendarEvent): string {
-    return `<b>${new Intl.DateTimeFormat(this.locale, {hour: 'numeric', minute: 'numeric'}).format(event.start)}</b> ${event.title}`;
-  }
+  week(event: TimeCardEntryEvent): string {
+    //return `<b>${new Intl.DateTimeFormat(this.locale, {hour: 'numeric', minute: 'numeric'}).format(event.start)}</b> ${event.title}`;
+    return `<b>${event.timecardentry.worktype.name}</b>`;
 
-  week(event: CalendarEvent): string {
-    return `<b>${new Intl.DateTimeFormat(this.locale, {hour: 'numeric', minute: 'numeric'}).format(event.start)}</b> ${event.title}`;
-  }
-
-  day(event: CalendarEvent): string {
-    return `<b>${new Intl.DateTimeFormat(this.locale, {hour: 'numeric', minute: 'numeric'}).format(event.start)}</b> ${event.title}`;
+    // display work type desc or pi name /w hours, multiline
   }
 }
