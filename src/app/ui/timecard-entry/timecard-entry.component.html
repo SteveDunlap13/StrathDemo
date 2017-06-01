@@ -1,16 +1,17 @@
 
 <div class="modal-header">
   <h5 class="modal-title">Event action occurred</h5>
-  <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+  <!--<button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
-  </button>
+  </button>-->
 </div>
 
 <div class="modal-body">
 
   <div [hidden]="submitted">
 
-    <form (ngSubmit)="onSubmit()" *ngIf="active" #tceForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #tceForm="ngForm">
+
       <div class="form-group row">
         <div class="col-3">
           <label for="worktype">Type</label>
@@ -87,6 +88,7 @@
         <div class="col">
           <button type="submit" class="btn btn-success float-right" 
                   [disabled]="!tceForm.form.valid || tceForm.form.pristine">Save</button>
+          <button type="button" class="btn btn-default float-right">Cancel   </button>
         </div>
       </div>
 

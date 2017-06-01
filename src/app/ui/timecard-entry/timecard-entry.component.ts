@@ -22,7 +22,6 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
       timecardentry: TimeCardEntry
   };
 
-  active = true;
   tceForm: NgForm;
   @ViewChild('tceForm') currentForm: NgForm;
 
@@ -53,11 +52,9 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
 
-    this.active = false;
     this.fetchWorkTypes();
     this.fetchPIWorkTasks();
     this.fetchWorkTasks();
-    setTimeout(() => this.active = true, 0);
   }
   ngAfterViewChecked() {
     this.formChanged();
@@ -67,8 +64,11 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
 
   formChanged() {
 
-    if (this.currentForm === this.tceForm) { return; }
-      this.tceForm = this.currentForm;
+    if (this.currentForm === this.tceForm) {
+      return;
+    }
+
+    this.tceForm = this.currentForm;
     if (this.tceForm) {
       this.tceForm.valueChanges.subscribe(data => this.onValueChanged(data));
     }
@@ -136,6 +136,10 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
 
 
   onSubmit(): void {
+
+    if (this.tceForm.invalid) {
+      return;
+    }
 
     this.submitted = true;
     this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry);

@@ -148,7 +148,7 @@ export class TimecardContainer implements OnInit {
 
     openModal(): void {
 
-        const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg' });
+        const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg', backdrop: 'static', keyboard: false });
         modalRef.componentInstance.modalData = this.modalData;
     }
 
