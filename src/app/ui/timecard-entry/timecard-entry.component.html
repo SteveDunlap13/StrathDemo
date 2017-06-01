@@ -10,7 +10,7 @@
 
   <div [hidden]="submitted">
 
-    <form (ngSubmit)="onSubmit()" #tceForm="ngForm">
+    <form (ngSubmit)="onSubmit()" *ngIf="active" #tceForm="ngForm">
       <div class="form-group row">
         <div class="col-3">
           <label for="worktype">Type</label>
@@ -57,8 +57,8 @@
         </div>
         <div  class="col-9">
           <select class="form-control form-control-sm" id="worktask" name="worktask"
-                  required 
                   [(ngModel)]="modalData.timecardentry.worktask.id">
+            <option [value]=""></option>
             <option *ngFor="let w of worktasks" [ngValue]="w.id">{{ w.name }}</option>
           </select>
         </div>
@@ -70,13 +70,15 @@
           <label for="value">Hours</label>
         </div>
         <div  class="col-2">
-          <input type="text" class="form-control form-control-sm" id="value" name="value"
-                required 
-                [(ngModel)]="modalData.timecardentry.value" #value="ngModel">
+          <input type="number" class="form-control form-control-sm" id="value" name="value"
+                required gt="0" #value="ngModel"
+                [(ngModel)]="modalData.timecardentry.value">
         </div>
         <div class="w-100"></div>
-        <div class="offset-sm-3 col-9" [hidden]="value.valid || value.pristine">
-            <div class="alert alert-danger">Value is required</div>
+        <div class="offset-sm-3 col-9">
+            <div *ngIf="formErrors.value" class="alert alert-danger">
+              {{ formErrors.value }}
+            </div>
         </div>
       </div>
 

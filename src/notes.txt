@@ -13,9 +13,11 @@ TODO
     - add
     - edit
     - delete
-    - field validation for fields, need a custom validator for value (numeric)
-        - see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
-
+    - see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
+    - https://github.com/yuyang041060120/ng2-validation
+    
+- month view, format titles (length)
+- week view, format titles
 
 - show holidays (api business logic)
 

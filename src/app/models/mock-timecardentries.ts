@@ -21,6 +21,38 @@ export let TIMECARDENTRIES: TimeCardEntry[] = [
         worktypedescription: '',
         worktask: { id: 4, name: 'Execution - (Application Development Stage)' },
         value: 2.5,
+    },
+    {
+        id: 2,
+        employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+
+        eventstart: new Date(),
+        eventend: new Date(),
+
+        colour: COLOURS.blue,
+        badgecolour: COLOURS.blue.primary,
+
+        worktype: { id: 2, name: 'ITSS Initiative', type: 'I' },
+        piworktype: { id: 4, code: 'I999-A', name: 'Max Gold e-Ordering', type: 'I' },
+        worktypedescription: '',
+        worktask: { id: 11, name: 'Meeting - (Post Implementation/Operation Stage)' },
+        value: 5,
+    },
+    {
+        id: 3,
+        employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+
+        eventstart: new Date(),
+        eventend: new Date(),
+
+        colour: COLOURS.red,
+        badgecolour: COLOURS.red.primary,
+
+        worktype: { id: 6, name: 'Meetings - Not related to a Project', type: 'O' },
+        piworktype: null,
+        worktypedescription: 'some meeting that was awesome!',
+        worktask: { id: 15, name: 'Other Administration - (Administration)' },
+        value: 0.5,
     }
 
 ];

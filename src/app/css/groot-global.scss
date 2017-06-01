@@ -78,6 +78,9 @@ input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, 
   max-height: 50rem;
   overflow-y: scroll;
 }
+.groot-badge {
+    display: block;
+}
 
 @import "./groot-common.scss";
 

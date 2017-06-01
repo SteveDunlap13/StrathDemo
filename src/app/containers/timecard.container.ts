@@ -193,7 +193,7 @@ export class TimecardContainer implements OnInit {
 
     // Return a sum of timecard entry hours for a given set of events
     // Used in month badge displays (total and grouped)
-    getHours(events: TimeCardEntryEvent[]) {
+    getHours(events: TimeCardEntryEvent[]): number {
 
         return events.reduce((a, v) => a + v.timecardentry.value, 0);
     }

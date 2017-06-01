@@ -5,9 +5,9 @@
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
   <div class="cell-totals">
-    <span *ngFor="let group of day.eventGroups" class="badge" [style.background-color]="group[1][0].timecardentry.badgecolour">
+    <div *ngFor="let group of day.eventGroups" class="badge groot-badge" [style.background-color]="group[1][0].timecardentry.badgecolour">
       {{ group[0] + ' {' + getHours(group[1]) + '}'  }}
-    </span>
+    </div>
   </div>
 </ng-template>
 

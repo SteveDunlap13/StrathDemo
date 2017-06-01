@@ -11,12 +11,12 @@ export interface TimeCardEntry {
     eventend: Date;
 
     colour: {};
-    badgecolour?: string;
+    badgecolour: string;
 
     worktype: WorkType;             // work type from api
     piworktype: PIWorkType;         // project / initiative from api
-    worktypedescription: string;    // description for work types not project or initiative
-    worktask: WorkTask;             // work task id from api
+    worktypedescription?: string;   // description for work types not project or initiative
+    worktask?: WorkTask;            // work task id from api
     value: number;                  // hours for this instance
 }
 
