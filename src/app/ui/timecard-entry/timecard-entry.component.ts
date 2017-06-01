@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TimeCardEntry, TimeCardEntryEvent, WorkTask, WorkType, PIWorkType } from '../../models/timecardentry';
 import { WorkTypeService, PIWorkTypeService, WorkTaskService } from '../../services/index';
+import { TimecardEntryService } from '../../services/index';
 
 
 @Component({
@@ -23,18 +24,14 @@ export class TimeCardEntryComponent implements OnInit {
   piworktypes: PIWorkType[] = [];
   worktasks: WorkTask[] = [];
 
-
-  //submitted = false;
-  //onSubmit() { this.submitted = true; }
-
+  submitted = false;
 
 
   constructor(public activeModal: NgbActiveModal,
               private workTypeService: WorkTypeService,
               private piworkTypeService: PIWorkTypeService,
-              private workTaskService: WorkTaskService) {}
-
-  //TODO: implement timecard entry form save
+              private workTaskService: WorkTaskService,
+              private timecardEntryService: TimecardEntryService) {}
 
   ngOnInit() {
 
@@ -50,9 +47,6 @@ export class TimeCardEntryComponent implements OnInit {
     this.workTypeService.getWorkTypes().subscribe(wt => {
 
       this.worktypes = wt;
-      //.map(x => {
-        //return x.name;
-      //});
     });
   }
 
@@ -73,10 +67,18 @@ export class TimeCardEntryComponent implements OnInit {
   }
 
 
+
   worktypeChanged(index: any): void {
 
     let worktypeitem = this.worktypes[index];
-
     this.modalData.timecardentry.worktype = worktypeitem;
+  }
+
+
+
+  onSubmit(): void {
+
+    this.submitted = true;
+    this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry);
   }
 }

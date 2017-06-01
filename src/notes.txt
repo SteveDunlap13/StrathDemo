@@ -13,6 +13,8 @@ TODO
     - add
     - edit
     - delete
+    - field validation for fields, need a custom validator for value (numeric)
+        - see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
 
 
 - show holidays (api business logic)

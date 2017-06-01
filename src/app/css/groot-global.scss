@@ -58,19 +58,19 @@ input[type="date"]:focus,
 input[type="month"]:focus,
 input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus,
 input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
-    border-color: $green-60 !important;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $green-60 !important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $green-60 !important;
-    outline: 0 none !important;
+    border-color: $green-60;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $green-60;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $green-60;
+    outline: 0 none;
 }
 
 
 
 .odd-cell {
-    background-color: $lighter-orange !important;
+    background-color: $orange-10 !important;
 }
 .events-found-cell {
-    background-color: $green-60 !important;
+    background-color: $green-10 !important;
 }
 
 .groot-calendar-container {
@@ -78,3 +78,6 @@ input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, 
   max-height: 50rem;
   overflow-y: scroll;
 }
+
+@import "./groot-common.scss";
+
