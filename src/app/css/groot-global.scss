@@ -80,7 +80,11 @@ input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, 
 }
 .groot-badge {
     display: block;
+    color: $black;
 }
+
+
+
 
 @import "./groot-common.scss";
 

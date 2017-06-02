@@ -12,9 +12,16 @@ export class EventTitleFormatter extends CalendarEventTitleFormatter {
 
 
   week(event: TimeCardEntryEvent): string {
-    //return `<b>${new Intl.DateTimeFormat(this.locale, {hour: 'numeric', minute: 'numeric'}).format(event.start)}</b> ${event.title}`;
-    return `<b>${event.timecardentry.worktype.name}</b>`;
 
-    // display work type desc or pi name /w hours, multiline
+    let worktype = event.timecardentry.worktype.name.length > 15
+        ? event.timecardentry.worktype.name.slice(0, 15) + '...'
+        : event.timecardentry.worktype.name;
+
+    return `<b>${worktype}</b> (${event.timecardentry.value})`;
+  }
+
+  weekTooltip(event: TimeCardEntryEvent): string {
+
+    return `<b>${event.timecardentry.worktype.name}</br>${event.timecardentry.worktask.name}</b>`;
   }
 }

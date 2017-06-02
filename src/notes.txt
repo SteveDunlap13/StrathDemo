@@ -15,30 +15,23 @@ TODO
     - delete
     - see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
     - https://github.com/yuyang041060120/ng2-validation
-    - fix cancel save bnts
     - fix heading
     - add flag for add, edit, view
     - add blank form, real-time validation save when submitted
-    - edit, real-time validation (item is updated realtime) but still needs save to update api
+    x- edit, real-time validation (item is updated realtime) but still needs save to update api
     - view, flag make everything read-only / labels
     
-    
-- month view, format titles (length)
-- week view, format titles
+- update service for error handling, etc eg: see update method
 
 - show holidays (api business logic)
 
 - need basic authorization to admin levels that manage work tasks, projects and inititatives
-
-- ui header (cleanup?)
-    - bootstrap theme?
+    - AD integration
+    - need username and possibly employee id
 
 - email notifications on status of completed events
 
-- AD integration
-    - need username and possibly employee id
 
-- forms not showing my css???
 
 
 Info

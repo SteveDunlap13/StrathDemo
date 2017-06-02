@@ -19,6 +19,7 @@ import { TimeCardEntry, TimeCardEntryEvent } from '../models/index';
 import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.component';
 
 
+
 @Component({
     selector: 'timecard-container',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,8 +41,8 @@ export class TimecardContainer implements OnInit {
 
     modalData: {
         action: string,
-        event: TimeCardEntryEvent,
-        timecardentry: TimeCardEntry
+        timecardentry?: TimeCardEntry
+        date?: Date
     };
 
     selectedDay: CalendarMonthViewDay;
@@ -64,20 +65,28 @@ export class TimecardContainer implements OnInit {
 
             const groups: any = {};
             day.events.forEach((event: TimeCardEntryEvent) => {
-                groups[event.timecardentry.worktype.name] = groups[event.timecardentry.worktype.name] || [];
-                groups[event.timecardentry.worktype.name].push(event);
+
+                let worktype = event.timecardentry.worktype.name.length > 15
+                    ? event.timecardentry.worktype.name.slice(0, 15) + '...'
+                    : event.timecardentry.worktype.name;
+
+                groups[worktype] = groups[worktype] || [];
+                groups[worktype].push(event);
             });
             day['eventGroups'] = (<any>Object).entries(groups);
 
+            // weekend background colours
             if (isWeekend(day.date)) {
                 day.cssClass = 'odd-cell';
             }
+            // background colour if a day has any events
             if (day.events.length > 0) {
                 day.cssClass = 'events-found-cell';
             }
         };
 
 
+        // used?  TODO: investigate
         this.selectDay = (day: CalendarMonthViewDay): void => {
             if (this.selectedDay && day.date.getTime() === this.selectedDay.date.getTime()) {
                 day.cssClass = 'cal-week-selected';
@@ -102,24 +111,37 @@ export class TimecardContainer implements OnInit {
                     end: new Date(timecardentry.eventend),
                     color: timecardentry.colour,
                     timecardentry: timecardentry,
-                    //cssClass: 'test-class',
                     draggable: true,
                     resizable: {
-                        beforeStart: true, // this allows you to configure the sides the event is resizable from
+                        beforeStart: true,
                         afterEnd: true
                     },
-                    actions: [{
-                        label: '<i class="fa fa-fw fa-pencil"></i>',
-                        onClick: ({event}: {event: TimeCardEntryEvent}): void => {
+                    actions: [
+                        {
+                            label: '<i class="fa fa-fw fa-trash red"></i>',
+                            onClick: ({event}: {event: TimeCardEntryEvent}): void => {
 
-                            //console.log('Event: Edited', event.timecardentry);
-                            this.modalData = { action: 'Edited',
-                                               event: (<TimeCardEntryEvent>event),
-                                               timecardentry: (<TimeCardEntryEvent>event).timecardentry };
+                                this.modalData = {
+                                    action: 'Delete',
+                                    timecardentry: (<TimeCardEntryEvent>event).timecardentry,
+                                    date: null
+                                };
+                                this.openModal();
+                            }
+                        },
+                        {
+                            label: '<i class="fa fa-fw fa-pencil blue"></i>',
+                            onClick: ({event}: {event: TimeCardEntryEvent}): void => {
 
-                            this.openModal();
+                                this.modalData = {
+                                    action: 'Edit',
+                                    timecardentry: (<TimeCardEntryEvent>event).timecardentry,
+                                    date: null
+                                };
+                                this.openModal();
+                            }
                         }
-                    }]
+                    ]
                 };
 
             });
@@ -133,13 +155,17 @@ export class TimecardContainer implements OnInit {
 
 
 
-    // Handle timecard entry click event
+    // Handle timecard entry click event from week view
+    // delete and edit action events are configured in fetchEvents
     handleEvent(action: string, {event}: {event: TimeCardEntryEvent}): void {
 
-        //console.log('Event: ' + action, event);
-        this.modalData = { action: action,
-                            event: event,
-                            timecardentry: event.timecardentry };
+        let tce: TimeCardEntry = Object.assign({}, event.timecardentry);
+
+        this.modalData = {
+            action: action,
+            timecardentry: tce,
+            date: null
+        };
 
         this.openModal();
     }
@@ -148,8 +174,17 @@ export class TimecardContainer implements OnInit {
 
     openModal(): void {
 
-        const modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg', backdrop: 'static', keyboard: false });
-        modalRef.componentInstance.modalData = this.modalData;
+        if (this.modalData.action !== 'Delete') {
+
+            let modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg', backdrop: 'static', keyboard: false });
+            modalRef.componentInstance.modalData = this.modalData;
+
+            modalRef.result.then((result) => {
+                if (result === 'Saved') {
+                    this.fetchEvents();
+                }
+            }, (reason) => { });
+        }
     }
 
 
@@ -157,26 +192,18 @@ export class TimecardContainer implements OnInit {
     // Add a new timecard entry
     addEvent(date: Date): void {
 
-//        this.tceid++;
-//
-//        // add event to api
-//        this.timecardService.createTimeCardEntry({
-//            id: this.tceid,
-//            employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
-//            eventstart: date,
-//            eventend: addHours(date, 1),
-//            worktask: 'Development',
-//            value: 7.5,
-//            colour: COLOURS.red,
-//            badgecolour: COLOURS.red.primary
-//        }).subscribe(res => console.log(JSON.stringify(res)));
+        this.modalData = {
+            action: 'Add',
+            timecardentry: null,
+            date: date
+        };
 
-//        this.fetchEvents();
+        this.openModal();
     }
 
 
 
-    // Event dragged
+    // Event dragged, event times changed
     eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
 
         event.start = newStart;
@@ -184,8 +211,13 @@ export class TimecardContainer implements OnInit {
         (<TimeCardEntryEvent>event).timecardentry.eventstart = newStart;
         (<TimeCardEntryEvent>event).timecardentry.eventend = newEnd;
 
-        this.timecardEntryService.updateTimeCardEntry((<TimeCardEntryEvent>event).timecardentry);
-            //.subscribe(res => console.log(JSON.stringify(res)));
+        this.timecardEntryService.updateTimeCardEntry((<TimeCardEntryEvent>event).timecardentry)
+            .subscribe(
+                result => {
+                    //console.log(result);
+                },
+                error => console.log(<any>error)
+            );
 
         this.refresh.next();
     }
@@ -196,5 +228,10 @@ export class TimecardContainer implements OnInit {
     getHours(events: TimeCardEntryEvent[]): number {
 
         return events.reduce((a, v) => a + v.timecardentry.value, 0);
+    }
+    // Month view tooltips for a specific event
+    getTooltip(tce: TimeCardEntry) {
+
+        return tce.worktype.name + `</br>` + tce.worktask.name;
     }
 }

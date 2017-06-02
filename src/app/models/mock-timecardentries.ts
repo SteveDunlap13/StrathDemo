@@ -14,7 +14,7 @@ export let TIMECARDENTRIES: TimeCardEntry[] = [
         eventend: new Date(),
 
         colour: COLOURS.red,
-        badgecolour: COLOURS.red.primary,
+        badgecolour: COLOURS.red.secondary,
 
         worktype: { id: 1, name: 'Project Work', type: 'P' },
         piworktype: { id: 2, code: '13659A', name: 'Forensic Toxicology Reporting Enhancements', type: 'P' },
@@ -30,7 +30,7 @@ export let TIMECARDENTRIES: TimeCardEntry[] = [
         eventend: new Date(),
 
         colour: COLOURS.blue,
-        badgecolour: COLOURS.blue.primary,
+        badgecolour: COLOURS.blue.secondary,
 
         worktype: { id: 2, name: 'ITSS Initiative', type: 'I' },
         piworktype: { id: 4, code: 'I999-A', name: 'Max Gold e-Ordering', type: 'I' },
@@ -46,9 +46,57 @@ export let TIMECARDENTRIES: TimeCardEntry[] = [
         eventend: new Date(),
 
         colour: COLOURS.red,
-        badgecolour: COLOURS.red.primary,
+        badgecolour: COLOURS.red.secondary,
+
+        worktype: { id: 8, name: 'Support & Maintenance', type: 'O' },
+        piworktype: null,
+        worktypedescription: 'some meeting that was awesome!',
+        worktask: { id: 15, name: 'Other Administration - (Administration)' },
+        value: 0.5,
+    },
+    {
+        id: 4,
+        employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+
+        eventstart: new Date(),
+        eventend: new Date(),
+
+        colour: COLOURS.blue,
+        badgecolour: COLOURS.blue.secondary,
 
         worktype: { id: 6, name: 'Meetings - Not related to a Project', type: 'O' },
+        piworktype: null,
+        worktypedescription: 'some meeting that was awesome!',
+        worktask: { id: 15, name: 'Other Administration - (Administration)' },
+        value: 0.5,
+    },
+    {
+        id: 4,
+        employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+
+        eventstart: new Date(),
+        eventend: new Date(),
+
+        colour: COLOURS.red,
+        badgecolour: COLOURS.red.secondary,
+
+        worktype: { id: 4, name: 'Professional Development', type: 'O' },
+        piworktype: null,
+        worktypedescription: 'some meeting that was awesome!',
+        worktask: { id: 15, name: 'Other Administration - (Administration)' },
+        value: 0.5,
+    },
+    {
+        id: 5,
+        employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+
+        eventstart: new Date(),
+        eventend: new Date(),
+
+        colour: COLOURS.yellow,
+        badgecolour: COLOURS.yellow.secondary,
+
+        worktype: { id: 5, name: 'Consulting & Collaboration', type: 'O' },
         piworktype: null,
         worktypedescription: 'some meeting that was awesome!',
         worktask: { id: 15, name: 'Other Administration - (Administration)' },

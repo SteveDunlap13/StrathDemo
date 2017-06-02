@@ -17,14 +17,15 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
 
   @Input()
     modalData: {
-      action: string, // Clicked or Edited
-      event: TimeCardEntryEvent,
-      timecardentry: TimeCardEntry
+      action: string, // Add, Edit, View
+      timecardentry?: TimeCardEntry,
+      date?: Date
   };
 
   tceForm: NgForm;
   @ViewChild('tceForm') currentForm: NgForm;
 
+  // Meta data from api for dropdowns
   worktypes: WorkType[] = [];
   piworktypes: PIWorkType[] = [];
   worktasks: WorkTask[] = [];
@@ -141,9 +142,16 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    this.submitted = true;
-    this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry);
-
-    //console.log(JSON.stringify(this.modalData.timecardentry));
+    this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry)
+      .subscribe(
+        result => {
+          // no error thrown, so assume a successful put (result is an empty object)
+          this.submitted = true;
+          this.activeModal.close('Saved');
+        },
+        error => {
+          console.log(<any>error);
+        }
+      );
   }
 }

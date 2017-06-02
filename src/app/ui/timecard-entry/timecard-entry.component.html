@@ -1,106 +1,93 @@
 
 <div class="modal-header">
   <h5 class="modal-title">Event action occurred</h5>
-  <!--<button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>-->
 </div>
 
 <div class="modal-body">
 
-  <div [hidden]="submitted">
+  <form (ngSubmit)="onSubmit()" #tceForm="ngForm">
 
-    <form (ngSubmit)="onSubmit()" #tceForm="ngForm">
+    <div class="form-group row">
+      <div class="col-3">
+        <label for="worktype">Type</label>
+      </div>
+      <div class="col-9">
+        <select class="form-control form-control-sm" id="worktype" name="worktype"
+                required 
+                [(ngModel)]="modalData.timecardentry.worktype.id"
+                (change)="worktypeChanged($event.target.selectedIndex)">
+          <option *ngFor="let w of worktypes" [ngValue]="w.id">{{ w.name }}</option>
+        </select>
+      </div>
+    </div>
 
-      <div class="form-group row">
-        <div class="col-3">
-          <label for="worktype">Type</label>
-        </div>
-        <div class="col-9">
-          <select class="form-control form-control-sm" id="worktype" name="worktype"
-                  required 
-                  [(ngModel)]="modalData.timecardentry.worktype.id"
-                  (change)="worktypeChanged($event.target.selectedIndex)">
-            <option *ngFor="let w of worktypes" [ngValue]="w.id">{{ w.name }}</option>
-          </select>
+
+    <div class="form-group row" *ngIf="modalData.timecardentry.worktype.type != 'O'">
+      <div  class="col-3">
+        <label for="piworktype">Project / Initiative</label>            
+      </div>
+      <div  class="col-9">
+        <select class="form-control form-control-sm" id="piworktype" name="piworktype"
+                required 
+                [(ngModel)]="modalData.timecardentry.piworktype.id">
+          <option *ngFor="let w of piworktypes | piworktypefilter : modalData.timecardentry.worktype.type" [ngValue]="w.id">{{ w.name }}</option>
+        </select>            
+      </div>
+    </div>
+
+
+    <div class="form-group row" *ngIf="modalData.timecardentry.worktype.type == 'O'">
+      <div  class="col-3">
+        <label for="worktypedescription">Description</label>
+      </div>
+      <div  class="col-9">
+        <input type="text" class="form-control form-control-sm" id="worktypedescription" name="worktypedescription"
+              [(ngModel)]="modalData.timecardentry.worktypedescription">
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <div  class="col-3">
+        <label for="worktask">Work Task</label>
+      </div>
+      <div  class="col-9">
+        <select class="form-control form-control-sm" id="worktask" name="worktask"
+                [(ngModel)]="modalData.timecardentry.worktask.id">
+          <option [value]=""></option>
+          <option *ngFor="let w of worktasks" [ngValue]="w.id">{{ w.name }}</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <div  class="col-3">
+        <label for="value">Hours</label>
+      </div>
+      <div  class="col-2">
+        <input type="number" class="form-control form-control-sm" id="value" name="value"
+              required gt="0" #value="ngModel"
+              [(ngModel)]="modalData.timecardentry.value">
+      </div>
+      <div class="w-100"></div>
+      <div class="offset-sm-3 col-9">
+          <div *ngIf="formErrors.value" class="alert alert-danger">
+            {{ formErrors.value }}
+          </div>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <div class="col-12">
+        <div class="text-right">
+          <button type="button" class="btn btn-default btn-sm" (click)="activeModal.dismiss('cancel')">Cancel</button>
+          <button type="submit" class="btn btn-success btn-sm" [disabled]="!tceForm.form.valid || tceForm.form.pristine">Save</button>
         </div>
       </div>
+    </div>
 
+  </form>
 
-      <div class="form-group row" *ngIf="modalData.timecardentry.worktype.type != 'O'">
-        <div  class="col-3">
-          <label for="piworktype">Project / Initiative</label>            
-        </div>
-        <div  class="col-9">
-          <select class="form-control form-control-sm" id="piworktype" name="piworktype"
-                  required 
-                  [(ngModel)]="modalData.timecardentry.piworktype.id">
-            <option *ngFor="let w of piworktypes | piworktypefilter : modalData.timecardentry.worktype.type" [ngValue]="w.id">{{ w.name }}</option>
-          </select>            
-        </div>
-      </div>
-
-
-      <div class="form-group row" *ngIf="modalData.timecardentry.worktype.type == 'O'">
-        <div  class="col-3">
-          <label for="worktypedescription">Description</label>
-        </div>
-        <div  class="col-9">
-          <input type="text" class="form-control form-control-sm" id="worktypedescription" name="worktypedescription"
-                [(ngModel)]="modalData.timecardentry.worktypedescription">
-        </div>
-      </div>
-
-
-      <div class="form-group row">
-        <div  class="col-3">
-          <label for="worktask">Work Task</label>
-        </div>
-        <div  class="col-9">
-          <select class="form-control form-control-sm" id="worktask" name="worktask"
-                  [(ngModel)]="modalData.timecardentry.worktask.id">
-            <option [value]=""></option>
-            <option *ngFor="let w of worktasks" [ngValue]="w.id">{{ w.name }}</option>
-          </select>
-        </div>
-      </div>
-
-
-      <div class="form-group row">
-        <div  class="col-3">
-          <label for="value">Hours</label>
-        </div>
-        <div  class="col-2">
-          <input type="number" class="form-control form-control-sm" id="value" name="value"
-                required gt="0" #value="ngModel"
-                [(ngModel)]="modalData.timecardentry.value">
-        </div>
-        <div class="w-100"></div>
-        <div class="offset-sm-3 col-9">
-            <div *ngIf="formErrors.value" class="alert alert-danger">
-              {{ formErrors.value }}
-            </div>
-        </div>
-      </div>
-
-
-      <div class="form-group row">
-        <div class="col">
-          <button type="submit" class="btn btn-success float-right" 
-                  [disabled]="!tceForm.form.valid || tceForm.form.pristine">Save</button>
-          <button type="button" class="btn btn-default float-right">Cancel   </button>
-        </div>
-      </div>
-
-    </form>
-
-  </div>
-  <div [hidden]="!submitted">
-    <h3>form submitted.</h3>
-  </div>
-
-</div>
-
-<div class="modal-footer" [hidden]="!submitted">
-  <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
 </div>

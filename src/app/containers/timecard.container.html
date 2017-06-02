@@ -5,8 +5,12 @@
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
   <div class="cell-totals">
-    <div *ngFor="let group of day.eventGroups" class="badge groot-badge" [style.background-color]="group[1][0].timecardentry.badgecolour">
-      {{ group[0] + ' {' + getHours(group[1]) + '}'  }}
+    <div *ngFor="let group of day.eventGroups"
+        class="badge groot-badge"
+        [mwlCalendarTooltip]="getTooltip(group[1][0].timecardentry)"
+        [style.background-color]="group[1][0].timecardentry.badgecolour"
+        >
+      <b>{{ group[0] }}</b> ({{ getHours(group[1]) }})
     </div>
   </div>
 </ng-template>
@@ -60,7 +64,7 @@
       [events]="events"
       [refresh]="refresh"
       (dayClicked)="viewDate = $event.date; addEvent($event.date)"
-      (eventClicked)="handleEvent('Clicked', $event)"
+      (eventClicked)="handleEvent('View', $event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       [headerTemplate]="weekHeaderTemplate"
       >
