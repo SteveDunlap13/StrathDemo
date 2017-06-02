@@ -29,6 +29,12 @@ TODO
 - need basic authorization to admin levels that manage work tasks, projects and inititatives
     - AD integration
     - need username and possibly employee id
+    - https://channel9.msdn.com/Blogs/Office-365-Dev/Creating-Client-Side-Only-apps-with-Angular-ADAL-and-Office-365-APIs
+    - https://github.com/chrisprice/adfs-example-integration/blob/master/index.js
+    - https://www.google.ca/search?q=angular+adfs&ie=utf-8&oe=utf-8&gws_rd=cr&ei=NqMxWdeHLeHRjwTd57uwBg#q=angular+adfs+-auth0+-angularjs
+    - https://www.npmjs.com/package/angular2-jwt
+    - 
+    - https://www.npmjs.com/package/angular-jwt
 
 - email notifications on status of completed events
 
