@@ -6,9 +6,9 @@
   </div>
   <div class="cell-totals">
     <div *ngFor="let group of day.eventGroups"
-        class="badge groot-badge"
-        [mwlCalendarTooltip]="getTooltip(group[1][0].timecardentry)"
-        [style.background-color]="group[1][0].timecardentry.badgecolour"
+            class="badge groot-badge"
+            [mwlCalendarTooltip]="getTooltip(group[1][0].timecardentry)"
+            [style.background-color]="group[1][0].timecardentry.badgecolour"
         >
       <b>{{ group[0] }}</b> ({{ getHours(group[1]) }})
     </div>

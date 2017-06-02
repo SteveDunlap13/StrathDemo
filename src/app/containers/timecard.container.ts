@@ -73,6 +73,7 @@ export class TimecardContainer implements OnInit {
                 groups[worktype] = groups[worktype] || [];
                 groups[worktype].push(event);
             });
+
             day['eventGroups'] = (<any>Object).entries(groups);
 
             // weekend background colours
