@@ -12,6 +12,10 @@
         >
       <b>{{ group[0] }}</b> ({{ getHours(group[1]) }})
     </div>
+    <div [hidden]="day.events.length === 0 || day.events.length < 4"
+         class="badge gray">
+      plus {{day.events.length - 3}} more events...
+    </div>
   </div>
 </ng-template>
 

@@ -1,18 +1,19 @@
 
   <div class="row">
-    <div class="col-8">
+    <div class="col">
 
       <div class="row text-center">
+      
         <div class="col-4">
           <div class="btn-group btn-group-sm">
             <div class="btn btn-outline-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
-              Previous
+              <
             </div>
             <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
               Today
             </div>
             <div class="btn btn-outline-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
-              Next
+              >
             </div>
           </div>
 
@@ -24,19 +25,14 @@
               Week
             </div>
           </div>
-          
         </div>
 
-        <div class="col-8">
+        <div class="col-8 text-center">
           <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h3>
         </div>
 
       </div>
-    </div>
 
-    <div class="col-4 text-right">
-      <!-- calendar commands -->
-      <!--<a addEventButton href="#" class="btn btn-sm btn-outline-success" (click)="addEvent.emit(viewDate)"><i class="fa fa-icon fa-plus"> Add</i></a>-->
     </div>
-</div>
+  </div>
     

@@ -31,22 +31,22 @@ import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.comp
 })
 export class TimecardContainer implements OnInit {
 
-    view = 'month';
-    viewDate: Date = new Date();
-    refresh: Subject<any> = new Subject();
+    private view = 'month';
+    private viewDate: Date = new Date();
+    private refresh: Subject<any> = new Subject();
 
-    events: TimeCardEntryEvent[] = [];
-    tceid: number;
-    groupEvents: (day: CalendarMonthViewDay) => void;
+    private events: TimeCardEntryEvent[] = [];
+    private tceid: number;
+    private groupEvents: (day: CalendarMonthViewDay) => void;
 
-    modalData: {
+    private modalData: {
         action: string,
         timecardentry?: TimeCardEntry
         date?: Date
     };
 
-    selectedDay: CalendarMonthViewDay;
-    selectDay: (day: CalendarMonthViewDay) => void;
+    private selectedDay: CalendarMonthViewDay;
+    private selectDay: (day: CalendarMonthViewDay) => void;
 
 
 
@@ -74,7 +74,12 @@ export class TimecardContainer implements OnInit {
                 groups[worktype].push(event);
             });
 
-            day['eventGroups'] = (<any>Object).entries(groups);
+            // let's only display the first 3 groups and add a class for UI flagging to note there are more groups
+            if ((<any>Object).entries(groups.length > 3)) {
+                day.cssClass = 'max-group';
+            }
+            // Only showing first 3 groups
+            day['eventGroups'] = (<any>Object).entries(groups).slice(0, 3);
 
             // weekend background colours
             if (isWeekend(day.date)) {
@@ -122,9 +127,11 @@ export class TimecardContainer implements OnInit {
                             label: '<i class="fa fa-fw fa-trash red"></i>',
                             onClick: ({event}: {event: TimeCardEntryEvent}): void => {
 
+                                let current: TimeCardEntry = Object.assign({}, (<TimeCardEntryEvent>event).timecardentry);
+
                                 this.modalData = {
                                     action: 'Delete',
-                                    timecardentry: (<TimeCardEntryEvent>event).timecardentry,
+                                    timecardentry: current,
                                     date: null
                                 };
                                 this.openModal();
@@ -134,9 +141,11 @@ export class TimecardContainer implements OnInit {
                             label: '<i class="fa fa-fw fa-pencil blue"></i>',
                             onClick: ({event}: {event: TimeCardEntryEvent}): void => {
 
+                                let current: TimeCardEntry = Object.assign({}, (<TimeCardEntryEvent>event).timecardentry);
+
                                 this.modalData = {
                                     action: 'Edit',
-                                    timecardentry: (<TimeCardEntryEvent>event).timecardentry,
+                                    timecardentry: current,
                                     date: null
                                 };
                                 this.openModal();
