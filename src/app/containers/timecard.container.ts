@@ -42,7 +42,8 @@ export class TimecardContainer implements OnInit {
     private modalData: {
         action: string,
         timecardentry?: TimeCardEntry
-        date?: Date
+        date?: Date,
+        heading: string
     };
 
     private selectedDay: CalendarMonthViewDay;
@@ -132,7 +133,8 @@ export class TimecardContainer implements OnInit {
                                 this.modalData = {
                                     action: 'Delete',
                                     timecardentry: current,
-                                    date: null
+                                    date: null,
+                                    heading: 'Delete'
                                 };
                                 this.openModal();
                             }
@@ -146,7 +148,8 @@ export class TimecardContainer implements OnInit {
                                 this.modalData = {
                                     action: 'Edit',
                                     timecardentry: current,
-                                    date: null
+                                    date: null,
+                                    heading: 'Edit'
                                 };
                                 this.openModal();
                             }
@@ -174,7 +177,8 @@ export class TimecardContainer implements OnInit {
         this.modalData = {
             action: action,
             timecardentry: tce,
-            date: null
+            date: null,
+            heading: 'View'
         };
 
         this.openModal();
@@ -205,7 +209,8 @@ export class TimecardContainer implements OnInit {
         this.modalData = {
             action: 'Add',
             timecardentry: null,
-            date: date
+            date: date,
+            heading: 'New Event'
         };
 
         this.openModal();

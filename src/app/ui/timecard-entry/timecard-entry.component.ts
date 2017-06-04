@@ -7,6 +7,7 @@ import { CustomValidators } from '../../validators/module';
 import { TimeCardEntry, TimeCardEntryEvent, WorkTask, WorkType, PIWorkType } from '../../models/timecardentry';
 import { WorkTypeService, PIWorkTypeService, WorkTaskService } from '../../services/index';
 import { TimecardEntryService } from '../../services/index';
+import { COLOURS } from '../../shared/colours';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
     modalData: {
       action: string, // Add, Edit, View
       timecardentry?: TimeCardEntry,
-      date?: Date
+      date?: Date,
+      heading: string
   };
 
   tceForm: NgForm;
@@ -56,6 +58,25 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
     this.fetchWorkTypes();
     this.fetchPIWorkTasks();
     this.fetchWorkTasks();
+
+
+    if (this.modalData.timecardentry === null) {
+
+      // useable only once with inmemoryapi service; not worried about figuring out last id; real api will apply its identity rules
+      this.modalData.timecardentry = {
+          id: -1,
+          employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
+          eventstart: this.modalData.date,
+          eventend: this.modalData.date,
+          colour: COLOURS.blue,
+          badgecolour: COLOURS.blue.secondary,
+          worktype: { id: 1, name: 'Project Work', type: 'P' },
+          piworktype: { id: 1, code: '13660', name: 'Billing Enhancements', type: 'P' },
+          worktypedescription: '',
+          worktask: { id: 1, name: 'Pre-Discovery - (Preliminary Project Stage)' },
+          value: 0
+      }
+    }
   }
   ngAfterViewChecked() {
     this.formChanged();
@@ -142,16 +163,39 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry)
-      .subscribe(
-        result => {
-          // no error thrown, so assume a successful put (result is an empty object)
-          this.submitted = true;
-          this.activeModal.close('Saved');
-        },
-        error => {
-          console.log(<any>error);
+    switch (this.modalData.action) {
+      case 'Add': {
+          this.timecardEntryService.createTimeCardEntry(this.modalData.timecardentry)
+            .subscribe(
+              result => {
+                // no error thrown, so assume a successful put (result is an empty object)
+                this.submitted = true;
+                this.activeModal.close('Saved');
+              },
+              error => {
+                console.log(<any>error);
+              }
+            );
         }
-      );
+        break;
+
+      case 'Edit': {
+          this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry)
+            .subscribe(
+              result => {
+                // no error thrown, so assume a successful put (result is an empty object)
+                this.submitted = true;
+                this.activeModal.close('Saved');
+              },
+              error => {
+                console.log(<any>error);
+              }
+            );
+        }
+        break;
+
+      default:
+        break;
+    }
   }
 }

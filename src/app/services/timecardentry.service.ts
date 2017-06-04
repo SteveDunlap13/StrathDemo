@@ -23,12 +23,21 @@ export class TimecardEntryService {
 
 
     createTimeCardEntry(tce: TimeCardEntry) {
-        return this.http.post(this.path, tce).map(res => res.json());
+
+        let body = JSON.stringify(tce);
+
+        return this.http.post(this.path, body, this.options)
+                        .map(this.extractData)
+                        .catch(this.handleError);
+        //return this.http.post(this.path, tce).map(res => res.json());
     }
 
     getTimeCardEntries(): Observable<TimeCardEntry[]> {
 
-        return this.http.get(this.path).map(res => res.json().data);
+        return this.http.get(this.path, this.options)
+                        .map(res => res.json().data)
+                        .catch(this.handleError);
+        //return this.http.get(this.path).map(res => res.json().data);
     }
 
     updateTimeCardEntry(tce: TimeCardEntry): Observable<any> {

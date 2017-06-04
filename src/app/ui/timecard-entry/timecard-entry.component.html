@@ -1,6 +1,6 @@
 
 <div class="modal-header">
-  <h5 class="modal-title">Event action occurred</h5>
+  <h5 class="modal-title">{{ modalData.heading }}</h5>
 </div>
 
 <div class="modal-body">
@@ -30,6 +30,7 @@
       <div  class="col-9">
         <select class="form-control form-control-sm" id="piworktype" name="piworktype"
                 required 
+                [disabled]="modalData.action ==='View'"
                 [(ngModel)]="modalData.timecardentry.piworktype.id">
           <option *ngFor="let w of piworktypes | piworktypefilter : modalData.timecardentry.worktype.type" [ngValue]="w.id">{{ w.name }}</option>
         </select>            
@@ -43,6 +44,7 @@
       </div>
       <div  class="col-9">
         <input type="text" class="form-control form-control-sm" id="worktypedescription" name="worktypedescription"
+              [disabled]="modalData.action ==='View'"
               [(ngModel)]="modalData.timecardentry.worktypedescription">
       </div>
     </div>
@@ -54,6 +56,7 @@
       </div>
       <div  class="col-9">
         <select class="form-control form-control-sm" id="worktask" name="worktask"
+                [disabled]="modalData.action ==='View'"
                 [(ngModel)]="modalData.timecardentry.worktask.id">
           <option [value]=""></option>
           <option *ngFor="let w of worktasks" [ngValue]="w.id">{{ w.name }}</option>
@@ -69,6 +72,7 @@
       <div  class="col-2">
         <input type="number" class="form-control form-control-sm" id="value" name="value"
               required gt="0" #value="ngModel"
+              [disabled]="modalData.action ==='View'"
               [(ngModel)]="modalData.timecardentry.value">
       </div>
       <div class="w-100"></div>
@@ -83,8 +87,16 @@
     <div class="form-group row">
       <div class="col-12">
         <div class="text-right">
-          <button type="button" class="btn btn-default btn-sm" (click)="activeModal.dismiss('cancel')">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" [disabled]="!tceForm.form.valid || tceForm.form.pristine">Save</button>
+          <button type="button" class="btn btn-default btn-sm" 
+                  [hidden]="modalData.action === 'View'"
+                  (click)="activeModal.dismiss('cancel')">Cancel</button>
+          
+          <button type="button" class="btn btn-default btn-sm" 
+                  [hidden]="modalData.action !== 'View'"
+                  (click)="activeModal.dismiss('cancel')">Close</button>
+
+          <button type="submit" class="btn btn-success btn-sm" 
+                  [hidden]="!tceForm.form.valid || tceForm.form.pristine">Save</button>
         </div>
       </div>
     </div>

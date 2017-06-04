@@ -10,16 +10,17 @@ Issues
 TODO
 -------
 - modal form(s)
-    - add
-    - edit
+    x- add
+    x- edit
     - delete
+    x- view
     - see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
     - https://github.com/yuyang041060120/ng2-validation
-    - fix heading
-    - add flag for add, edit, view
+    x- fix headings (good for now)
+    x- add flag for add, edit, view
     - add blank form, real-time validation save when submitted
     x- edit, real-time validation (item is updated realtime) but still needs save to update api
-    - view, flag make everything read-only / labels
+    x- view, flag make everything read-only / labels
     
 - update service for error handling, etc eg: see update method
 - add a constants file
