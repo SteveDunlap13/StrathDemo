@@ -6,3 +6,4 @@ export * from './piworktype.service';
 export * from './timecardentry.service';
 export * from './worktask.service';
 export * from './worktype.service';
+export * from './authentication.service';

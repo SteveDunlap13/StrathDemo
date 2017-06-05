@@ -9,21 +9,21 @@ Issues
 
 TODO
 -------
-- modal form(s)
+- modal form(s) for events
     x- add
     x- edit
     - delete
     x- view
-    - see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
-    - https://github.com/yuyang041060120/ng2-validation
     x- fix headings (good for now)
     x- add flag for add, edit, view
-    - add blank form, real-time validation save when submitted
     x- edit, real-time validation (item is updated realtime) but still needs save to update api
     x- view, flag make everything read-only / labels
     
-- update service for error handling, etc eg: see update method
+x- update service for error handling, etc eg: see update method
+
 - add a constants file
+- show tooltips for edit and delete events
+- use ngModal for delete event notification (remove bootbox references)
 
 - show holidays (api business logic)
 
@@ -36,8 +36,22 @@ TODO
     - https://www.npmjs.com/package/angular2-jwt
     - 
     - https://www.npmjs.com/package/angular-jwt
+    -
+    - https://damienbod.com/2016/10/01/identityserver4-webapi-and-angular2-in-a-single-asp-net-core-project/
 
-- email notifications on status of completed events
+    - https://www.youtube.com/watch?v=-Tk_bLdqgLQ  Angular ADAL, see 12:55
+
+
+
+
+- need to lock events for past submitted weeks
+    - does an employee need to submit their week?
+    - visual background colours for submitted / processed weeks
+    - does someone need to manually review everyone's weekly events?
+        - do they lock it down after?  Must be able to unlock
+    - 
+    - email notifications on status of completed events
+    - need a few admin screens to manage base data
 
 
 
@@ -48,4 +62,5 @@ Info
     - https://ng-bootstrap.github.io/#/components/modal
 - Angular forms
     - https://angular.io/docs/ts/latest/guide/forms.html
-- 
+- see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
+- https://github.com/yuyang041060120/ng2-validation

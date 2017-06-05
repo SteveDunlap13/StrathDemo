@@ -52,7 +52,14 @@ export class TimecardEntryService {
                         .catch(this.handleError);
     }
 
+    deleteTimeCardEntry(id: number): Observable<any> {
 
+        let url = `${this.path}/${id}`;
+
+        return this.http.delete(url, this.options)
+                        .map(this.extractData)
+                        .catch(this.handleError);
+    }
 
 
 

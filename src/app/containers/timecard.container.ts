@@ -18,6 +18,8 @@ import { Logger } from '../services/logger.service';
 import { TimeCardEntry, TimeCardEntryEvent } from '../models/index';
 import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.component';
 
+declare var bootbox: any;
+
 
 
 @Component({
@@ -130,13 +132,21 @@ export class TimecardContainer implements OnInit {
 
                                 let current: TimeCardEntry = Object.assign({}, (<TimeCardEntryEvent>event).timecardentry);
 
-                                this.modalData = {
-                                    action: 'Delete',
-                                    timecardentry: current,
-                                    date: null,
-                                    heading: 'Delete'
-                                };
-                                this.openModal();
+//                                bootbox.confirm({
+//                                    message: 'This is a confirm with custom button text and color! Do you like it?',
+//                                    buttons: {
+//                                        confirm: { label: 'Yes', className: 'btn-danger' },
+//                                        cancel: { label: 'No', className: 'btn-default' }
+//                                    },
+//                                    callback: function (result) {
+//
+//                                        //console.log('This was logged in the callback: ' + result);
+//                                        if (result) {
+//                                            console.log(current.id);
+//                                            this.deleteEvent(current.id);
+//                                        }
+//                                    }
+//                                });
                             }
                         },
                         {
@@ -214,6 +224,18 @@ export class TimecardContainer implements OnInit {
         };
 
         this.openModal();
+    }
+
+    deleteEvent(id: number): void {
+
+        this.timecardEntryService.deleteTimeCardEntry(id)
+            .subscribe(
+                r => {
+                    //console.log(result);
+                    this.fetchEvents();
+                },
+                error => console.log(<any>error)
+            );
     }
 
 

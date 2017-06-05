@@ -15,13 +15,15 @@ import { CalendarModule } from 'angular-calendar';
 
 import { StrathDemoUIModule } from './ui/module';
 import { AppComponent }  from './app.component';
+import { LoginComponent } from './ui/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 import { DashboardContainer } from './containers/dashboard.container';
 import { TimecardContainer } from './containers/timecard.container';
-
+import { SecureContainer } from './containers/secure.container';
 
 import { Logger, ApiService, InMemoryApiService, PIWorkTypeService,
-         TimecardEntryService, WorkTaskService, WorkTypeService } from './services/index';
+         TimecardEntryService, WorkTaskService, WorkTypeService, AuthenticationService } from './services/index';
 
 
 @NgModule({
@@ -37,10 +39,9 @@ import { Logger, ApiService, InMemoryApiService, PIWorkTypeService,
     StrathDemoUIModule,
 
     RouterModule.forRoot([
-          {
-              path: '',
-              component: DashboardContainer,
-          },
+          { path: 'login', component: LoginComponent },
+          { path: '', component: DashboardContainer, },
+          { path: 'secure', component: SecureContainer, canActivate: [AuthGuard] },
           { path: '**', redirectTo: '' }
       ])
   ],
@@ -48,7 +49,9 @@ import { Logger, ApiService, InMemoryApiService, PIWorkTypeService,
   declarations: [
     AppComponent,
     DashboardContainer,
-    TimecardContainer
+    TimecardContainer,
+    LoginComponent,
+    SecureContainer
   ],
 
   providers: [
@@ -57,7 +60,9 @@ import { Logger, ApiService, InMemoryApiService, PIWorkTypeService,
     TimecardEntryService,
     WorkTypeService,
     PIWorkTypeService,
-    WorkTaskService
+    WorkTaskService,
+    AuthenticationService,
+    AuthGuard
   ],
 
   bootstrap:    [ AppComponent ]
