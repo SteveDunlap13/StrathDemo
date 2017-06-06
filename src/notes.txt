@@ -44,6 +44,12 @@ x- update service for error handling, etc eg: see update method
 - https://github.com/ranveeraggarwal/ng2-adal-QuickStart
 - https://stackoverflow.com/questions/38495888/using-angular2-to-authenticate-against-azure-ad
 
+- https://github.com/ranveeraggarwal/ng2-adal-QuickStart
+- https://www.google.ca/search?q=adal+get+group+access&ie=utf-8&oe=utf-8&gws_rd=cr&ei=ae42WerXBcGMjwOEs4KIDg#q=adal+group+access
+- https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-groupclaims/
+- http://itq.nl/combining-adal-js-with-role-based-security-in-asp-net-web-api/
+
+
 
 - need to lock events for past submitted weeks
     - does an employee need to submit their week?
