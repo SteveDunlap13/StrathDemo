@@ -60,3 +60,4 @@ src/app/css/**/*.css
 src/app/css/**/*.min.css
 
 src/app/services/secret.service.*
+src/shared/constants.*
