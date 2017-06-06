@@ -82,6 +82,22 @@ input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, 
     display: block;
     color: $black;
 }
+.cal-week-badge {
+    background-color: $yellow-60;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: $black;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 10px;
+
+}
+
 
 @import "./groot-common.scss";
 

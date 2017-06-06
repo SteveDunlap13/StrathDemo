@@ -7,14 +7,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { TimeCardEntry } from '../models/index';
-
 import { Logger } from '../services/logger.service';
+import { GROOTS } from '../shared/constants';
 
 
 @Injectable()
 export class TimecardEntryService {
 
-    private path = '/api/timecardentries';
+    private path = GROOTS.TIMECARDAPI;
     private headers = new Headers({'Content-Type': 'application/json'});
     private options = new RequestOptions({ headers: this.headers });
 
@@ -75,7 +75,7 @@ export class TimecardEntryService {
             ? error.message
             : error.status
                 ? `${error.status} - ${error.statusText}`
-                : 'Server error';
+                : GROOTS.serverError;
 
         console.error(errMsg);
 

@@ -14,7 +14,8 @@ export class AuthGuard implements CanActivate {
         if (this.adalService.userInfo.isAuthenticated) {
 
             //console.log(JSON.stringify(this.adalService.userInfo));
-            console.log(JSON.stringify(this.adalService));
+            //console.log(JSON.stringify(this.adalService));
+
             return true;
         } else {
 

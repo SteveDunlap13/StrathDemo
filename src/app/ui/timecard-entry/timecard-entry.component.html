@@ -5,7 +5,30 @@
 
 <div class="modal-body">
 
-  <form (ngSubmit)="onSubmit()" #tceForm="ngForm">
+  <form (ngSubmit)="onDeleteSubmit()" #tceForm="ngForm" [hidden]="modalData.action !== 'DELETE'">
+
+    <div class="form-group row">
+      <div class="col-12">
+        <p>Are you sure you want to delete this timecard event?</p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-12">
+        <div class="text-right">
+          <button type="button" class="btn btn-default btn-sm" 
+                  (click)="activeModal.dismiss('cancel')">No</button>
+          
+          <button type="submit" class="btn btn-danger btn-sm">Yes</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+
+
+  <form (ngSubmit)="onSubmit()" #tceForm="ngForm" [hidden]="modalData.action === 'DELETE'">
 
     <div class="form-group row">
       <div class="col-3">
@@ -14,7 +37,7 @@
       <div class="col-9">
         <select class="form-control form-control-sm" id="worktype" name="worktype"
                 required 
-                [disabled]="modalData.action ==='View'"
+                [disabled]="modalData.action ==='VIEW'"
                 [(ngModel)]="modalData.timecardentry.worktype.id"
                 (change)="worktypeChanged($event.target.selectedIndex)">
           <option *ngFor="let w of worktypes" [ngValue]="w.id">{{ w.name }}</option>
@@ -30,7 +53,7 @@
       <div  class="col-9">
         <select class="form-control form-control-sm" id="piworktype" name="piworktype"
                 required 
-                [disabled]="modalData.action ==='View'"
+                [disabled]="modalData.action ==='VIEW'"
                 [(ngModel)]="modalData.timecardentry.piworktype.id">
           <option *ngFor="let w of piworktypes | piworktypefilter : modalData.timecardentry.worktype.type" [ngValue]="w.id">{{ w.name }}</option>
         </select>            
@@ -44,7 +67,7 @@
       </div>
       <div  class="col-9">
         <input type="text" class="form-control form-control-sm" id="worktypedescription" name="worktypedescription"
-              [disabled]="modalData.action ==='View'"
+              [disabled]="modalData.action ==='VIEW'"
               [(ngModel)]="modalData.timecardentry.worktypedescription">
       </div>
     </div>
@@ -56,7 +79,7 @@
       </div>
       <div  class="col-9">
         <select class="form-control form-control-sm" id="worktask" name="worktask"
-                [disabled]="modalData.action ==='View'"
+                [disabled]="modalData.action ==='VIEW'"
                 [(ngModel)]="modalData.timecardentry.worktask.id">
           <option [value]=""></option>
           <option *ngFor="let w of worktasks" [ngValue]="w.id">{{ w.name }}</option>
@@ -72,7 +95,7 @@
       <div  class="col-2">
         <input type="number" class="form-control form-control-sm" id="value" name="value"
               required gt="0" #value="ngModel"
-              [disabled]="modalData.action ==='View'"
+              [disabled]="modalData.action ==='VIEW'"
               [(ngModel)]="modalData.timecardentry.value">
       </div>
       <div class="w-100"></div>
@@ -88,11 +111,11 @@
       <div class="col-12">
         <div class="text-right">
           <button type="button" class="btn btn-default btn-sm" 
-                  [hidden]="modalData.action === 'View'"
+                  [hidden]="modalData.action === 'VIEW'"
                   (click)="activeModal.dismiss('cancel')">Cancel</button>
           
           <button type="button" class="btn btn-default btn-sm" 
-                  [hidden]="modalData.action !== 'View'"
+                  [hidden]="modalData.action !== 'VIEW'"
                   (click)="activeModal.dismiss('cancel')">Close</button>
 
           <button type="submit" class="btn btn-success btn-sm" 

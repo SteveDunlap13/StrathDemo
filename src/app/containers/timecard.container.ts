@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EventTitleFormatter } from '../formatters/index';
 import { COLOURS } from '../shared/colours';
+import { GROOTS } from '../shared/constants';
 
 import { TimecardEntryService } from '../services/index';
 import { Logger } from '../services/logger.service';
@@ -17,7 +18,6 @@ import { Logger } from '../services/logger.service';
 import { TimeCardEntry, TimeCardEntryEvent } from '../models/index';
 import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.component';
 
-declare var bootbox: any;
 
 
 
@@ -32,7 +32,7 @@ declare var bootbox: any;
 })
 export class TimecardContainer implements OnInit {
 
-    private view = 'month';
+    private view = GROOTS.CALENDARVIEW;  // default calendar view
     private viewDate: Date = new Date();
     private refresh: Subject<any> = new Subject();
 
@@ -53,7 +53,6 @@ export class TimecardContainer implements OnInit {
 
 
     constructor(private timecardEntryService: TimecardEntryService,
-                private modal: NgbModal,
                 private logger: Logger,
                 private modalService: NgbModal) { }
 
@@ -68,8 +67,8 @@ export class TimecardContainer implements OnInit {
             const groups: any = {};
             day.events.forEach((event: TimeCardEntryEvent) => {
 
-                let worktype = event.timecardentry.worktype.name.length > 15
-                    ? event.timecardentry.worktype.name.slice(0, 15) + '...'
+                let worktype = event.timecardentry.worktype.name.length > GROOTS.EVENTHEADINGLIMIT
+                    ? event.timecardentry.worktype.name.slice(0, GROOTS.EVENTHEADINGLIMIT) + GROOTS.EXTRATEXTFLAG
                     : event.timecardentry.worktype.name;
 
                 groups[worktype] = groups[worktype] || [];
@@ -77,11 +76,11 @@ export class TimecardContainer implements OnInit {
             });
 
             // let's only display the first 3 groups and add a class for UI flagging to note there are more groups
-            if ((<any>Object).entries(groups.length > 3)) {
+            if ((<any>Object).entries(groups.length > GROOTS.MAXMONTHEVENTS)) {
                 day.cssClass = 'max-group';
             }
             // Only showing first 3 groups
-            day['eventGroups'] = (<any>Object).entries(groups).slice(0, 3);
+            day['eventGroups'] = (<any>Object).entries(groups).slice(0, GROOTS.MAXMONTHEVENTS);
 
             // weekend background colours
             if (isWeekend(day.date)) {
@@ -114,7 +113,7 @@ export class TimecardContainer implements OnInit {
 
                 return <TimeCardEntryEvent> {
 
-                    title: 'Employee: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
+                    title: 'Title: ' + timecardentry.employee.firstname + ' ' + timecardentry.employee.lastname,
                     start: new Date(timecardentry.eventstart),
                     end: new Date(timecardentry.eventend),
                     color: timecardentry.colour,
@@ -131,21 +130,13 @@ export class TimecardContainer implements OnInit {
 
                                 let current: TimeCardEntry = Object.assign({}, (<TimeCardEntryEvent>event).timecardentry);
 
-//                                bootbox.confirm({
-//                                    message: 'This is a confirm with custom button text and color! Do you like it?',
-//                                    buttons: {
-//                                        confirm: { label: 'Yes', className: 'btn-danger' },
-//                                        cancel: { label: 'No', className: 'btn-default' }
-//                                    },
-//                                    callback: function (result) {
-//
-//                                        //console.log('This was logged in the callback: ' + result);
-//                                        if (result) {
-//                                            console.log(current.id);
-//                                            this.deleteEvent(current.id);
-//                                        }
-//                                    }
-//                                });
+                                this.modalData = {
+                                    action: GROOTS.DELETEACTION,
+                                    timecardentry: current,
+                                    date: null,
+                                    heading: GROOTS.DELETEHEADING
+                                };
+                                this.openModal();
                             }
                         },
                         {
@@ -155,10 +146,10 @@ export class TimecardContainer implements OnInit {
                                 let current: TimeCardEntry = Object.assign({}, (<TimeCardEntryEvent>event).timecardentry);
 
                                 this.modalData = {
-                                    action: 'Edit',
+                                    action: GROOTS.EDITACTION,
                                     timecardentry: current,
                                     date: null,
-                                    heading: 'Edit'
+                                    heading: GROOTS.EDITHEADING
                                 };
                                 this.openModal();
                             }
@@ -186,7 +177,7 @@ export class TimecardContainer implements OnInit {
             action: action,
             timecardentry: tce,
             date: null,
-            heading: 'View'
+            heading: GROOTS.VIEWHEADING
         };
 
         this.openModal();
@@ -196,17 +187,14 @@ export class TimecardContainer implements OnInit {
 
     openModal(): void {
 
-        if (this.modalData.action !== 'Delete') {
+        let modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg', backdrop: 'static', keyboard: false });
+        modalRef.componentInstance.modalData = this.modalData;
 
-            let modalRef = this.modalService.open(TimeCardEntryComponent, { size: 'lg', backdrop: 'static', keyboard: false });
-            modalRef.componentInstance.modalData = this.modalData;
-
-            modalRef.result.then((result) => {
-                if (result === 'Saved') {
-                    this.fetchEvents();
-                }
-            }, (reason) => { });
-        }
+        modalRef.result.then((result) => {
+            if (result === GROOTS.SUCCESSFLAG) {
+                this.fetchEvents();
+            }
+        }, (reason) => { });
     }
 
 
@@ -215,10 +203,10 @@ export class TimecardContainer implements OnInit {
     addEvent(date: Date): void {
 
         this.modalData = {
-            action: 'Add',
+            action: GROOTS.ADDACTION,
             timecardentry: null,
             date: date,
-            heading: 'New Event'
+            heading: GROOTS.ADDHEADING
         };
 
         this.openModal();
@@ -256,6 +244,7 @@ export class TimecardContainer implements OnInit {
 
         this.refresh.next();
     }
+
 
 
     // Return a sum of timecard entry hours for a given set of events

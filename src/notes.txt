@@ -12,7 +12,7 @@ TODO
 - modal form(s) for events
     x- add
     x- edit
-    - delete
+    x- delete
     x- view
     x- fix headings (good for now)
     x- add flag for add, edit, view
@@ -21,11 +21,45 @@ TODO
     
 x- update service for error handling, etc eg: see update method
 
-- add a constants file
 - show tooltips for edit and delete events
-- use ngModal for delete event notification (remove bootbox references)
+
+x- add a constants file
+x- use ngModal for delete event notification (remove bootbox references)
+x- week view show total
 
 - show holidays (api business logic)
+
+- admin screen(s)
+    - view employees
+    - view week totals for specified week
+    - export / report employee events
+    - unlock flag for a specified date range for an employee
+    - email notifications
+- global service
+    - lock previous week(s) every Monday @ 12:00pm
+    - don't lock if admin unlock flag is set
+- need active directory group info added to employee object
+
+- need to lock events for past submitted weeks
+    - does an employee need to submit their week?
+    - visual background colours for submitted / processed weeks
+    - does someone need to manually review everyone's weekly events?
+        - do they lock it down after?  Must be able to unlock
+    - 
+    - email notifications on status of completed events
+    - need a few admin screens to manage base data
+
+
+
+
+Info
+-------
+- NgbModal info
+    - https://ng-bootstrap.github.io/#/components/modal
+- Angular forms
+    - https://angular.io/docs/ts/latest/guide/forms.html
+- see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
+- https://github.com/yuyang041060120/ng2-validation
 
 - need basic authorization to admin levels that manage work tasks, projects and inititatives
     - AD integration
@@ -49,25 +83,3 @@ x- update service for error handling, etc eg: see update method
 - https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-groupclaims/
 - http://itq.nl/combining-adal-js-with-role-based-security-in-asp-net-web-api/
 
-
-
-- need to lock events for past submitted weeks
-    - does an employee need to submit their week?
-    - visual background colours for submitted / processed weeks
-    - does someone need to manually review everyone's weekly events?
-        - do they lock it down after?  Must be able to unlock
-    - 
-    - email notifications on status of completed events
-    - need a few admin screens to manage base data
-
-
-
-
-Info
--------
-- NgbModal info
-    - https://ng-bootstrap.github.io/#/components/modal
-- Angular forms
-    - https://angular.io/docs/ts/latest/guide/forms.html
-- see https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#template2
-- https://github.com/yuyang041060120/ng2-validation

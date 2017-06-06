@@ -7,14 +7,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { PIWorkType } from '../models/index';
-
 import { Logger } from '../services/logger.service';
+import { GROOTS } from '../shared/constants';
 
 
 @Injectable()
 export class PIWorkTypeService {
 
-    path: string = '/api/piworktypes';
+    private path = GROOTS.PIWORKTYPESAPI;
 
     // constructor(private apiService: ApiService, private storeHelperService: StoreHelperService) { }
     //constructor(private http: Http, private storeHelperService: StoreHelperService, private logger: Logger) { }

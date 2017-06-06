@@ -2,6 +2,7 @@
 import { LOCALE_ID, Inject } from '@angular/core';
 import { CalendarEventTitleFormatter, CalendarEvent } from 'angular-calendar';
 import { TimeCardEntryEvent } from '../models/index';
+import { GROOTS } from '../shared/constants';
 
 
 export class EventTitleFormatter extends CalendarEventTitleFormatter {
@@ -13,8 +14,8 @@ export class EventTitleFormatter extends CalendarEventTitleFormatter {
 
   week(event: TimeCardEntryEvent): string {
 
-    let worktype = event.timecardentry.worktype.name.length > 15
-        ? event.timecardentry.worktype.name.slice(0, 15) + '...'
+    let worktype = event.timecardentry.worktype.name.length > GROOTS.EVENTHEADINGLIMIT
+        ? event.timecardentry.worktype.name.slice(0, GROOTS.EVENTHEADINGLIMIT) + '...'
         : event.timecardentry.worktype.name;
 
     return `<b>${worktype}</b> (${event.timecardentry.value})`;

@@ -8,6 +8,7 @@ import { TimeCardEntry, TimeCardEntryEvent, WorkTask, WorkType, PIWorkType } fro
 import { WorkTypeService, PIWorkTypeService, WorkTaskService } from '../../services/index';
 import { TimecardEntryService } from '../../services/index';
 import { COLOURS } from '../../shared/colours';
+import { GROOTS } from '../../shared/constants';
 
 
 @Component({
@@ -24,24 +25,24 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
       heading: string
   };
 
-  tceForm: NgForm;
+  private tceForm: NgForm;
   @ViewChild('tceForm') currentForm: NgForm;
 
   // Meta data from api for dropdowns
-  worktypes: WorkType[] = [];
-  piworktypes: PIWorkType[] = [];
-  worktasks: WorkTask[] = [];
+  private worktypes: WorkType[] = [];
+  private piworktypes: PIWorkType[] = [];
+  private worktasks: WorkTask[] = [];
 
-  submitted = false;
+  private submitted = false;
 
-  formErrors = {
+  private formErrors = {
     'value': ''
   };
 
-  validationMessages = {
+  private validationMessages = {
     'value': {
-      'required': 'Hours are required.',
-      'gt':       'Hours must be greater than 0.'
+      'required': GROOTS.HOURSREQUIRED,
+      'gt':       GROOTS.HOURSGREATERTHANZERO
     }
   };
 
@@ -63,6 +64,7 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
     if (this.modalData.timecardentry === null) {
 
       // useable only once with inmemoryapi service; not worried about figuring out last id; real api will apply its identity rules
+      //TODO: need to change this when talking to real api
       this.modalData.timecardentry = {
           id: -1,
           employee: { id: 3628, firstname: 'Steve', lastname: 'Dunlap' },
@@ -164,13 +166,13 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
     }
 
     switch (this.modalData.action) {
-      case 'Add': {
+      case GROOTS.ADDACTION: {
           this.timecardEntryService.createTimeCardEntry(this.modalData.timecardentry)
             .subscribe(
               result => {
                 // no error thrown, so assume a successful put (result is an empty object)
                 this.submitted = true;
-                this.activeModal.close('Saved');
+                this.activeModal.close(GROOTS.SUCCESSFLAG);
               },
               error => {
                 console.log(<any>error);
@@ -179,13 +181,13 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
         }
         break;
 
-      case 'Edit': {
+      case GROOTS.EDITACTION: {
           this.timecardEntryService.updateTimeCardEntry(this.modalData.timecardentry)
             .subscribe(
               result => {
                 // no error thrown, so assume a successful put (result is an empty object)
                 this.submitted = true;
-                this.activeModal.close('Saved');
+                this.activeModal.close(GROOTS.SUCCESSFLAG);
               },
               error => {
                 console.log(<any>error);
@@ -197,5 +199,20 @@ export class TimeCardEntryComponent implements OnInit, AfterViewChecked {
       default:
         break;
     }
+  }
+
+  onDeleteSubmit(): void {
+
+    this.timecardEntryService.deleteTimeCardEntry(this.modalData.timecardentry.id)
+      .subscribe(
+        result => {
+          // no error thrown, so assume a successful put (result is an empty object)
+          this.submitted = true;
+          this.activeModal.close(GROOTS.SUCCESSFLAG);
+        },
+        error => {
+          console.log(<any>error);
+        }
+      );
   }
 }
