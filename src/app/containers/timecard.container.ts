@@ -8,7 +8,6 @@ import { isSameMonth, isSameDay, startOfMonth, endOfMonth,
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { EventTitleFormatter } from '../formatters/index';
 import { COLOURS } from '../shared/colours';
 
@@ -172,7 +171,6 @@ export class TimecardContainer implements OnInit {
             this.refresh.next();
         });
     }
-
 
 
 

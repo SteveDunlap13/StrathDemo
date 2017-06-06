@@ -41,7 +41,8 @@ x- update service for error handling, etc eg: see update method
 
     - https://www.youtube.com/watch?v=-Tk_bLdqgLQ  Angular ADAL, see 12:55
 
-
+- https://github.com/ranveeraggarwal/ng2-adal-QuickStart
+- https://stackoverflow.com/questions/38495888/using-angular2-to-authenticate-against-azure-ad
 
 
 - need to lock events for past submitted weeks

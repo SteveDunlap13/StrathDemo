@@ -58,3 +58,5 @@ src/main.js.map
 # Ignore sass compiled styled sheet files
 src/app/css/**/*.css
 src/app/css/**/*.min.css
+
+src/app/services/secret.service.*

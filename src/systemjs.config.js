@@ -38,7 +38,12 @@
       'rxjs': 'npm:rxjs',
       'rrule': 'npm:rrule@2.2.0',
 
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+
+      
+      'ng2-adal': 'npm:ng2-adal',
+      'adal': 'npm:adal-angular/lib',
+      'adal-angular': 'npm:adal-angular/lib'
     },
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -51,6 +56,9 @@
           }
         }
       },
+      'ng2-adal': { main: 'core.js', defaultExtension: 'js' },
+      'adal-angular': {main: 'adal-angular', defaultExtension: 'js'},
+      'adal': { main: 'adal.js', defaultExtension: 'js' },
       rxjs: {
         defaultExtension: 'js'
       },

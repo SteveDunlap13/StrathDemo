@@ -23,6 +23,4 @@ export class CalendarHeaderComponent {
   @Output() viewChange: EventEmitter<string> = new EventEmitter();
 
   @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
-
-  @Output() addEvent: EventEmitter<Date> = new EventEmitter();
 }
