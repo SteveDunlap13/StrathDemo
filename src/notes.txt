@@ -5,7 +5,9 @@ Issues
 - week view, selected day needs css colour
     - asked on github, I see no event handler there...
 
-
+- removed from packages, do i need?
+    "canonical-path": "0.0.2",
+    "concurrently": "^3.2.0",
 
 TODO
 -------

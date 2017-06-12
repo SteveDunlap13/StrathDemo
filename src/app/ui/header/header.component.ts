@@ -5,7 +5,7 @@ import { AdalService } from 'ng2-adal/core';
 @Component({
   selector: 'header',
   templateUrl: './header.component.html',
-  styleUrls: ['app/css/groot-header.css']
+  styleUrls: ['../../css/groot-header.css']
 })
 export class HeaderComponent  {
 
