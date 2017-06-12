@@ -49,7 +49,8 @@ x- week view show total
     - email notifications on status of completed events
     - need a few admin screens to manage base data
 
-
+- look at https://blogs.msdn.microsoft.com/premier_developer/2017/04/26/using-adal-with-angular2/
+- 
 
 
 Info
