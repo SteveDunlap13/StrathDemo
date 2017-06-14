@@ -1,4 +1,4 @@
-
+/*
 import {} from 'jasmine';
 import { async, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
@@ -51,3 +51,4 @@ describe('TimecardContainer', () => {
 // see this for tests /w router-outlet
 // https://github.com/antonybudianto/angular-starter/tree/master/src/app
 
+*/
