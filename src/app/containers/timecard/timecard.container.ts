@@ -8,15 +8,15 @@ import { isSameMonth, isSameDay, startOfMonth, endOfMonth,
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { EventTitleFormatter } from '../formatters/index';
-import { COLOURS } from '../shared/colours';
-import { GROOTS } from '../shared/constants';
+import { EventTitleFormatter } from '../../formatters/index';
+import { COLOURS } from '../../shared/colours';
+import { GROOTS } from '../../shared/constants';
 
-import { TimecardEntryService } from '../services/index';
-import { Logger } from '../services/logger.service';
+import { TimecardEntryService } from '../../services/index';
+import { Logger } from '../../services/logger.service';
 
-import { TimeCardEntry, TimeCardEntryEvent } from '../models/index';
-import { TimeCardEntryComponent } from '../ui/timecard-entry/timecard-entry.component';
+import { TimeCardEntry, TimeCardEntryEvent } from '../../models/index';
+import { TimeCardEntryComponent } from '../../ui/timecard-entry/timecard-entry.component';
 
 
 

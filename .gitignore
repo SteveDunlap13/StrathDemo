@@ -61,3 +61,4 @@ src/app/css/**/*.min.css
 
 src/app/services/secret.service.*
 src/app/shared/constants.*
+npm-debug.log*

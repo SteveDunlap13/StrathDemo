@@ -17,9 +17,9 @@ import { StrathDemoUIModule } from './ui/module';
 import { AppComponent }  from './app.component';
 import { AuthGuard } from './guards/auth.guard';
 
-import { DashboardContainer } from './containers/dashboard.container';
-import { TimecardContainer } from './containers/timecard.container';
-import { SecureContainer } from './containers/secure.container';
+import { DashboardContainer } from './containers/dashboard/dashboard.container';
+import { TimecardContainer } from './containers/timecard/timecard.container';
+import { SecureContainer } from './containers/secure/secure.container';
 
 import { AdalService } from 'ng2-adal/core';
 
