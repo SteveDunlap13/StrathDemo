@@ -11,6 +11,8 @@ Issues
 
 TODO
 -------
+- https://angular-2-training-book.rangle.io/handout/testing/
+
 - modal form(s) for events
     x- add
     x- edit
